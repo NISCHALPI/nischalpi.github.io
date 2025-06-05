@@ -5,6 +5,8 @@
 
 // Define CSS variables for the light theme
 :root {
+  color-scheme: light dark;
+  
   // Light theme defaults (from $light-theme map)
   --background-color: #{map-get($light-theme, 'background-color')};
   --surface-color: #{map-get($light-theme, 'surface-color')};
@@ -49,21 +51,14 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// Class for handling theme transitions
-.theme-transition {
-  transition: background-color 0.3s ease,
-              color 0.3s ease,
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
-}
-
-// Dark theme with CSS variables
-[data-theme="dark"] {
-  --background-color: #{map-get($dark-theme, 'background-color')};
-  --surface-color: #{map-get($dark-theme, 'surface-color')};
-  --text-color: #{map-get($dark-theme, 'text-color')};
-  --text-color-soft: #{map-get($dark-theme, 'text-color-soft')};
-  --heading-color: #{map-get($dark-theme, 'heading-color')};
+// Dark theme styles
+:root[data-theme="dark"] {
+  // Override light theme variables with dark theme values
+  --background-color: #{map-get($dark-theme, 'background-color')} !important;
+  --surface-color: #{map-get($dark-theme, 'surface-color')} !important;
+  --text-color: #{map-get($dark-theme, 'text-color')} !important;
+  --text-color-soft: #{map-get($dark-theme, 'text-color-soft')} !important;
+  --heading-color: #{map-get($dark-theme, 'heading-color')} !important;
   --border-color: #{map-get($dark-theme, 'border-color')};
   --selection-background: #{map-get($dark-theme, 'selection-background')};
   --selection-text: #{map-get($dark-theme, 'selection-text')};
@@ -75,13 +70,43 @@
   --scrollbar-track: #{map-get($dark-theme, 'scrollbar-track')};
   
   // Link colors for dark theme
-  --link-color: #{lighten($primary-color, 15%)};
-  --link-hover-color: #{lighten($primary-color, 25%)};
+  --link-color: #{lighten($primary-color, 10%)};
+  --link-hover-color: #{lighten($primary-color, 20%)};
   --blockquote-color: #{map-get($dark-theme, 'text-color-soft')};
-  
-  // Ensure math content is visible in dark mode
-  --equation-background: rgba(139, 92, 246, 0.1);
-  --equation-border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+// Apply theme variables to elements
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  min-height: 100vh; // Ensure full viewport coverage
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Style elements using CSS variables
+a {
+  color: var(--link-color);
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+}
+
+blockquote {
+  color: var(--blockquote-color);
+  border-left-color: var(--border-color);
+}
+
+code {
+  background-color: var(--code-background);
+}
+
+// Add theme transition class
+.theme-transition {
+  transition: var(--transition-standard);
 }
 
 // Theme toggle button styles
