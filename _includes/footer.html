@@ -10,13 +10,20 @@
         <ul class="social-media-list">
           {%- for social in site.social -%}
             <li>
-              <a href="{{ social.user_url }}" target="_blank" rel="noopener noreferrer">
+              <a href="{{ social.user_url }}" title="{{ social.platform }}" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-{{ social.platform | downcase }}"></i>
                 <span class="username">{{ social.platform | capitalize }}</span>
               </a>
             </li>
           {%- endfor -%}
         </ul>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Contact</h2>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        {% if site.location %}
+        <p><i class="fas fa-map-marker-alt"></i> {{ site.location }}</p>
+        {% endif %}
       </div>
     </div>
     <div class="copyright">
