@@ -4,6 +4,11 @@ $animation-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
 $stagger-delay: 0.1s !default;
 $particle-count: 20 !default;
 
+// Blog animation specific variables
+$blog-fade-duration: 0.8s !default;
+$blog-fade-easing: ease-out !default; 
+$blog-stagger-delay: 0.1s !default;
+
 // Performance optimization
 @mixin performance-optimize {
   will-change: transform, opacity;

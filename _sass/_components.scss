@@ -1,18 +1,13 @@
 /* Header and Navigation Styles */
 .site-header {
+  @include fixed-header;
   background-color: transparent;
   transition: var(--transition-standard);
   border-bottom: 1px solid transparent;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: $z-index-header;
   padding: 1rem 0;
   
   .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-between;
   }
   
   .site-title {
@@ -22,22 +17,7 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    position: relative;
-    
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--primary-color);
-      transition: width 0.3s ease;
-    }
-    
-    &:hover:after {
-      width: 100%;
-    }
+    @include link-underline-animation;
   }
 }
 
@@ -110,7 +90,7 @@
     border-radius: var(--border-radius);
     transition: var(--transition-fast);
     text-decoration: none;
-    position: relative;
+    @include link-centered-underline-animation;
     
     &:not(:last-child) {
       margin-right: 0.5rem;
@@ -119,22 +99,6 @@
     &:hover {
       background-color: var(--hover-background);
       color: var(--primary-color);
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 50%;
-      background-color: var(--primary-color);
-      transition: all 0.3s ease;
-    }
-    
-    &:hover::after {
-      width: 80%;
-      left: 10%;
     }
   }
 }
@@ -179,10 +143,7 @@
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--heading-color) 0%, var(--primary-color) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      @include gradient-text(linear-gradient(135deg, var(--heading-color) 0%, var(--primary-color) 100%));
       
       @media (max-width: $breakpoint-md) {
         font-size: 2.5rem;
@@ -216,41 +177,14 @@
 
 /* Card Component */
 .card {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-  transition: var(--transition-standard);
-  border: 1px solid var(--border-color);
-  height: 100%;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow-hover);
-  }
+  @extend %card-with-hover;
   
   .card-img-wrapper {
-    position: relative;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
-    overflow: hidden;
-    
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-  }
-  
-  &:hover .card-img-wrapper img {
-    transform: scale(1.05);
+    @include card-image-wrapper;
   }
   
   .card-content {
-    padding: 1.5rem;
+    @extend %card-content;
   }
   
   .card-title {
@@ -275,8 +209,8 @@
   }
   
   .card-meta {
-    display: flex;
-    align-items: center;
+    @extend %flex-center;
+    justify-content: flex-start;
     color: var(--text-color-soft);
     font-size: 0.85rem;
     
@@ -292,33 +226,14 @@
 
 /* Button Component */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--border-radius);
-  font-weight: 500;
-  text-decoration: none;
-  transition: var(--transition-fast);
-  cursor: pointer;
-  border: none;
-  font-size: 1rem;
-  
-  i {
-    margin-right: 0.5rem;
-  }
+  @include btn-base;
   
   &.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    
-    &:hover {
-      background-color: var(--primary-color-dark);
-      transform: translateY(-2px);
-    }
+    @include btn-primary;
   }
   
   &.btn-secondary {
+    @include btn-base;
     background-color: var(--secondary-color);
     color: white;
     
@@ -329,15 +244,7 @@
   }
   
   &.btn-outline {
-    background-color: transparent;
-    border: 2px solid var(--border-color);
-    color: var(--text-color);
-    
-    &:hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-      transform: translateY(-2px);
-    }
+    @include btn-outline;
   }
   
   &.btn-lg {
@@ -346,33 +253,25 @@
   }
   
   &.btn-sm {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.85rem;
+    @include btn-small;
   }
 }
 
 /* Badge Component */
 .badge {
-  display: inline-block;
-  padding: 0.35rem 0.75rem;
-  border-radius: 2rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background-color: var(--primary-color);
-  color: white;
+  @extend %badge;
   
   &.badge-primary {
-    background-color: var(--primary-color);
+    @extend %badge-primary;
   }
   
   &.badge-secondary {
-    background-color: var(--secondary-color);
+    @extend %badge-secondary;
   }
   
   &.badge-accent {
     background-color: var(--accent-color);
+    color: white;
   }
   
   &.badge-outline {
@@ -384,12 +283,7 @@
 
 /* Math Equation Component */
 .math-equation {
-  background-color: var(--equation-background);
-  border: var(--equation-border);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  margin: 2rem 0;
-  overflow-x: auto;
+  @include equation-box;
   
   .equation-title {
     color: var(--heading-color);
@@ -425,9 +319,7 @@
   }
   
   .timeline-item {
-    position: relative;
-    padding-left: 2.5rem;
-    margin-bottom: 2rem;
+    @include timeline-item-base;
     
     @media (min-width: $breakpoint-md) {
       width: 50%;
@@ -445,13 +337,9 @@
       }
     }
     
+    @include timeline-dot;
+    
     &::before {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background-color: var(--primary-color);
       left: -7px;
       top: 0.5rem;
       
@@ -480,11 +368,8 @@
     }
     
     .timeline-content {
-      background-color: var(--card-background);
-      border-radius: var(--border-radius);
+      @include card-base;
       padding: 1.25rem;
-      box-shadow: var(--card-shadow);
-      border: 1px solid var(--border-color);
     }
     
     .timeline-title {

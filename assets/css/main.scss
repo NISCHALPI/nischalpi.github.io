@@ -3,6 +3,8 @@
 
 @import "variables";
 @import "theme";
+@import "mixins";
+@import "placeholders"; // Added placeholders file
 @import "base";
 @import "typography";
 @import "grid";
@@ -19,3 +21,4 @@
 @import "teaching";
 @import "resources";
 @import "contact";
+@import "home";

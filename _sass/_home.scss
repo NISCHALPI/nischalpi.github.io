@@ -1,0 +1,126 @@
+// Custom styling for the home page
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  text-align: center;
+  background: transparent;
+}
+
+.professional-profile {
+  max-width: 900px;
+  margin: 0 auto;
+  background: transparent; // Ensure transparency
+  opacity: 0; // Start fully transparent
+  animation: fadeIn 1s $animation-easing forwards; // Main container fade in
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      text-align: left;
+    }
+    
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: fadeIn 0.8s $animation-easing 0.2s forwards;
+    }
+    
+    .profile-title {
+      margin-left: 0;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s $animation-easing 0.4s forwards;
+      
+      @media (min-width: 768px) {
+        margin-left: 2rem;
+        margin-top: 0;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .designation {
+        font-size: 1.1rem;
+        opacity: 0.85;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .professional-bio {
+    margin: 1rem 0 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 1s $animation-easing 0.6s forwards;
+  }
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1s $animation-easing 0.8s forwards;
+  
+  .hero-button {
+    @extend .btn;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    padding: 0.8rem 1.8rem;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(0);
+      transition: transform 0.3s ease;
+      border-radius: var(--border-radius);
+      z-index: -1;
+    }
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+      
+      &:before {
+        transform: scale(1);
+      }
+    }
+    
+    &.primary {
+      @extend .btn-primary;
+    }
+    
+    &.secondary {
+      @extend .btn-outline;
+    }
+  }
+  }
+

@@ -1,0 +1,223 @@
+// Style Guide - Documentation of standardized components
+// This file serves as documentation only and is not imported in the main.scss
+
+/*
+==========================================================================
+GITHUB PAGES STYLE GUIDE
+==========================================================================
+
+This style guide documents the standardized components and styles used across
+the website. To maintain consistency, please use these standardized elements.
+
+==========================================================================
+CARDS
+==========================================================================
+
+1. Basic Card
+   - Use %card for base card styles
+   - Example:
+     ```scss
+     .my-element {
+       @extend %card;
+     }
+     ```
+
+2. Card with Hover Effect
+   - Use %card-with-hover for cards with lift and shadow on hover
+   - Example:
+     ```scss
+     .my-element {
+       @extend %card-with-hover;
+     }
+     ```
+
+3. Card with Image
+   - Use @include card-image-wrapper() for image containers
+   - Example:
+     ```scss
+     .my-element {
+       @extend %card-with-hover;
+       
+       .image-container {
+         @include card-image-wrapper(56.25%); // 16:9 aspect ratio
+       }
+     }
+     ```
+
+4. Card Content Section
+   - Use %card-content for content areas inside cards
+   - Example:
+     ```scss
+     .my-element {
+       @extend %card-with-hover;
+       
+       .content {
+         @extend %card-content;
+       }
+     }
+     ```
+
+5. Card Footer
+   - Use %card-footer for card footers
+   - Example:
+     ```scss
+     .my-element {
+       @extend %card-with-hover;
+       
+       .footer {
+         @extend %card-footer;
+       }
+     }
+     ```
+
+==========================================================================
+BUTTONS
+==========================================================================
+
+1. Primary Button
+   - Use %btn-primary for primary action buttons
+   - Example:
+     ```scss
+     .my-button {
+       @extend %btn-primary;
+     }
+     ```
+
+2. Secondary Button
+   - Use %btn-secondary for secondary action buttons
+   - Example:
+     ```scss
+     .my-button {
+       @extend %btn-secondary;
+     }
+     ```
+
+3. Outline Button
+   - Use %btn-outline for outlined buttons
+   - Example:
+     ```scss
+     .my-button {
+       @extend %btn-outline;
+     }
+     ```
+
+4. Small Button
+   - Use %btn-small for smaller buttons
+   - Example:
+     ```scss
+     .my-button {
+       @extend %btn-small;
+     }
+     ```
+
+5. Text Button (Link)
+   - Use %btn-text for text links that act like buttons
+   - Example:
+     ```scss
+     .my-link {
+       @extend %btn-text;
+     }
+     ```
+
+==========================================================================
+BADGES & TAGS
+==========================================================================
+
+1. Basic Badge
+   - Use %badge for base badge styles
+   - Example:
+     ```scss
+     .my-badge {
+       @extend %badge;
+     }
+     ```
+
+2. Primary Badge
+   - Use %badge-primary for primary color badges
+   - Example:
+     ```scss
+     .my-badge {
+       @extend %badge-primary;
+     }
+     ```
+
+3. Secondary Badge
+   - Use %badge-secondary for secondary color badges
+   - Example:
+     ```scss
+     .my-badge {
+       @extend %badge-secondary;
+     }
+     ```
+
+4. Tag Style
+   - Use %tag for category/keyword tags
+   - Example:
+     ```scss
+     .my-tag {
+       @extend %tag;
+     }
+     ```
+
+==========================================================================
+LINKS
+==========================================================================
+
+1. Underline Animation
+   - Use %link-underline for links with animated underline effect
+   - Example:
+     ```scss
+     .my-link {
+       @extend %link-underline;
+     }
+     ```
+
+2. Centered Underline Animation
+   - Use %link-centered-underline for links with centered underline animation
+   - Example:
+     ```scss
+     .my-link {
+       @extend %link-centered-underline;
+     }
+     ```
+
+==========================================================================
+LAYOUTS
+==========================================================================
+
+1. Flex Center
+   - Use %flex-center to center content with flexbox
+   - Example:
+     ```scss
+     .my-container {
+       @extend %flex-center;
+     }
+     ```
+
+2. Flex Between
+   - Use %flex-between for space-between flex layout
+   - Example:
+     ```scss
+     .my-container {
+       @extend %flex-between;
+     }
+     ```
+
+3. Grid Layout
+   - Use @include grid-layout() for responsive grid layouts
+   - Example:
+     ```scss
+     .my-grid {
+       @include grid-layout(300px, 2rem);
+     }
+     ```
+
+4. Section Container
+   - Use %section-container for standard section spacing
+   - Example:
+     ```scss
+     .my-section {
+       @extend %section-container;
+     }
+     ```
+*/

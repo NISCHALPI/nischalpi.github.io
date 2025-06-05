@@ -40,18 +40,24 @@ layout: default
     </div>
   </div>
 
-  <div class="comments">
+  <div class="comments animate-on-scroll" data-animation="animate__fadeIn">
     <h2>Comments</h2>
     <div id="utterances-container" class="utterances-frame"></div>
-    <script src="https://utteranc.es/client.js"
-        repo="{{ site.repository }}"
-        issue-term="pathname"
-        label="comment"
-        theme="preferred-color-scheme"
-        crossorigin="anonymous"
-        async>
-    </script>
     <script>
+      // Load utterances after the page has loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        const utterancesScript = document.createElement('script');
+        utterancesScript.src = 'https://utteranc.es/client.js';
+        utterancesScript.setAttribute('repo', '{{ site.github.repository_nwo }}');
+        utterancesScript.setAttribute('issue-term', 'pathname');
+        utterancesScript.setAttribute('label', 'blog-comment');
+        utterancesScript.setAttribute('theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light');
+        utterancesScript.setAttribute('crossorigin', 'anonymous');
+        utterancesScript.setAttribute('async', '');
+        
+        document.querySelector('.utterances-frame').appendChild(utterancesScript);
+      });
+
       // Update utterances theme when site theme changes
       const observer = new MutationObserver(function(mutations) {
         const utterancesFrame = document.querySelector('.utterances-frame iframe');

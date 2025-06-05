@@ -2,23 +2,13 @@
 
 // Research intro section
 .research-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  @include grid-layout(300px, 2rem);
   margin-bottom: 4rem;
   
   .highlight-card {
-    background: var(--card-background);
-    border-radius: var(--border-radius);
+    @extend %card-with-hover;
     padding: 2rem;
     text-align: center;
-    transition: var(--transition-standard);
-    border: 1px solid var(--border-color);
-    
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--box-shadow-hover);
-    }
     
     .highlight-icon {
       font-size: 2.5rem;
@@ -47,6 +37,7 @@
 
 // Research intro section
 .research-intro {
+  @extend %section-container;
   text-align: center;
   max-width: 800px;
   margin: 0 auto 4rem;
@@ -75,26 +66,23 @@
 
 // Research areas section
 .research-areas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
+  @include grid-layout(400px, 2rem);
   margin: 2rem 0 4rem;
   
   .research-area {
+    @include card-base;
     padding: 0;
-    transition: var(--transition-standard);
     
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--box-shadow-hover);
+      @include card-hover;
     }
     
     .area-header {
       background: var(--surface-color);
       padding: 1.5rem;
       border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
+      @extend %flex-center;
+      justify-content: flex-start;
       gap: 1rem;
       
       i {

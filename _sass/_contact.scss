@@ -117,21 +117,10 @@
   }
   
   button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    @extend .btn;
+    @extend .btn-primary;
     width: 100%;
-    
-    &:hover {
-      background-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
+    padding: 0.875rem 2rem;
     
     &:active {
       transform: translateY(0);

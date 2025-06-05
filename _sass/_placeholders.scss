@@ -1,0 +1,140 @@
+// Placeholder selectors for common components using the @extend directive
+
+// ==========================================================================
+// Card Placeholders
+// ==========================================================================
+
+// Base card style
+%card {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+}
+
+// Card with hover effect
+%card-with-hover {
+  @extend %card;
+  @include card-hover;
+}
+
+// Card content area
+%card-content {
+  @include card-content;
+}
+
+// Card footer
+%card-footer {
+  @include card-footer;
+}
+
+// ==========================================================================
+// Button Placeholders
+// ==========================================================================
+
+// Base button
+%btn {
+  @include btn-base;
+}
+
+// Primary button
+%btn-primary {
+  @include btn-primary;
+}
+
+// Secondary button
+%btn-secondary {
+  @include btn-secondary;
+}
+
+// Outline button
+%btn-outline {
+  @include btn-outline;
+}
+
+// Small button
+%btn-small {
+  @include btn-small;
+}
+
+// Text button (link styled as button)
+%btn-text {
+  @include btn-text;
+}
+
+// ==========================================================================
+// Badge & Tag Placeholders
+// ==========================================================================
+
+// Base badge
+%badge {
+  @include badge-base;
+}
+
+// Primary badge
+%badge-primary {
+  @include badge-primary;
+}
+
+// Secondary badge
+%badge-secondary {
+  @include badge-secondary;
+}
+
+// Tag style
+%tag {
+  @include tag-style;
+}
+
+// ==========================================================================
+// Link Placeholders
+// ==========================================================================
+
+// Link with underline animation
+%link-underline {
+  @include link-underline-animation;
+}
+
+// Link with centered underline animation
+%link-centered-underline {
+  @include link-centered-underline-animation;
+}
+
+// ==========================================================================
+// Layout Placeholders
+// ==========================================================================
+
+// Flex center container
+%flex-center {
+  @include flex-center;
+}
+
+// Flex between container
+%flex-between {
+  @include flex-between;
+}
+
+// Standard grid layout
+%grid-layout {
+  @include grid-layout;
+}
+
+// Section container
+%section-container {
+  width: 100%;
+  margin: 2rem 0 3rem;
+}
+
+// Section heading
+%section-heading {
+  font-size: 2rem;
+  color: var(--heading-color);
+  margin-bottom: 1.5rem;
+}
+
+// Section description
+%section-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color-soft);
+  margin-bottom: 2rem;
+}

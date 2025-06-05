@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
       '.research-item', 
       '.publication-item',
       '.home-section > h2',
-      '.contact-form'
+      '.contact-form',
+      '.featured-post',
+      '.blog-search-container',
+      '.page-title',
+      '.page-description'
     ];
     
     selectors.forEach((selector, index) => {
@@ -47,14 +51,33 @@ document.addEventListener('DOMContentLoaded', function() {
           // Set different animations based on element type
           switch(selector) {
             case '.post-card':
+              item.dataset.animation = 'animate__fadeInUp';
+              item.dataset.delay = (i * 100) + 'ms'; // Consistent staggered delay
+              break;
             case '.research-item':
             case '.publication-item':
               item.dataset.animation = 'animate__fadeInUp';
-              item.dataset.delay = (i * 100) + 'ms'; // Stagger items
+              item.dataset.delay = (i * 100) + 'ms'; // Keep stagger for other items
               break;
             case '.timeline-item':
               item.dataset.animation = 'animate__fadeInUp';
               item.dataset.delay = (i * 150) + 'ms';
+              break;
+            case '.featured-post':
+              item.dataset.animation = 'animate__fadeIn';
+              item.dataset.delay = '0'; // Show featured post immediately
+              break;
+            case '.blog-search-container':
+              item.dataset.animation = 'animate__fadeIn';
+              item.dataset.delay = '200ms'; // Small delay for search container
+              break;
+            case '.page-title':
+              item.dataset.animation = 'animate__fadeInDown';
+              item.dataset.delay = '0'; // Show title immediately
+              break;
+            case '.page-description':
+              item.dataset.animation = 'animate__fadeIn';
+              item.dataset.delay = '300ms'; // Delay description slightly
               break;
             case '.home-section > h2':
               item.dataset.animation = 'animate__fadeInDown';

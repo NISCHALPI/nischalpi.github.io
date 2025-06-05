@@ -1,0 +1,340 @@
+// Enhanced mixins for standardizing elements across the site
+
+// ==========================================================================
+// Card Mixins
+// ==========================================================================
+
+// Card base styles
+@mixin card-base {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: var(--transition-standard);
+  height: 100%;
+}
+
+// Card hover effect - supports different transform values
+@mixin card-hover($y-offset: -5px) {
+  &:hover {
+    transform: translateY($y-offset);
+    box-shadow: var(--box-shadow-hover);
+  }
+}
+
+// Card image container with configurable aspect ratio
+@mixin card-image-wrapper($aspect-ratio: 56.25%, $scale-factor: 1.05) {
+  position: relative;
+  padding-top: $aspect-ratio;
+  overflow: hidden;
+  
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  &:hover img {
+    transform: scale($scale-factor);
+  }
+}
+
+// Card content wrapper with configurable padding
+@mixin card-content($padding: 1.5rem) {
+  padding: $padding;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// Card footer
+@mixin card-footer($margin-top: 1rem, $padding-top: 1rem) {
+  margin-top: $margin-top;
+  padding-top: $padding-top;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ==========================================================================
+// Button Mixins
+// ==========================================================================
+
+// Button base styles - Unified approach for all buttons
+@mixin btn-base($padding: 0.75rem 1.5rem) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-decoration: none !important; // Added !important to ensure it overrides default link behaviors
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  padding: $padding;
+  
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+// Primary button style
+@mixin btn-primary {
+  @include btn-base;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  
+  &:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+}
+
+// Secondary button style
+@mixin btn-secondary {
+  @include btn-base;
+  background-color: var(--surface-color);
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  
+  &:hover {
+    background-color: var(--hover-background);
+    transform: translateY(-2px);
+  }
+}
+
+// Outline button style
+@mixin btn-outline {
+  @include btn-base;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
+// Small button style
+@mixin btn-small {
+  @include btn-base(0.5rem 1rem);
+  font-size: 0.875rem;
+}
+
+// Text button style (for links that look like buttons)
+@mixin btn-text {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  
+  i {
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover {
+    color: var(--primary-color-dark);
+    
+    i {
+      transform: translateX(3px);
+    }
+  }
+}
+
+// ==========================================================================
+// Badge & Tag Mixins
+// ==========================================================================
+
+// Badge base styles
+@mixin badge-base($padding: 0.35rem 0.75rem) {
+  display: inline-block;
+  padding: $padding;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// Primary badge
+@mixin badge-primary {
+  @include badge-base;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+}
+
+// Secondary badge
+@mixin badge-secondary {
+  @include badge-base;
+  background-color: rgba(var(--secondary-color-rgb), 0.1);
+  color: var(--secondary-color);
+}
+
+// Tag style for categories and keywords
+@mixin tag-style {
+  @include badge-base(0.25rem 0.6rem);
+  background-color: var(--hover-background);
+  color: var(--text-color-soft);
+  font-size: 0.7rem;
+  transition: var(--transition-fast);
+  
+  &:hover {
+    background-color: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--primary-color);
+  }
+}
+
+// ==========================================================================
+// Link Animation Mixins
+// ==========================================================================
+
+// Underline animation for links
+@mixin link-underline-animation {
+  position: relative;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+  
+  &:hover:after {
+    width: 100%;
+  }
+}
+
+// Centered underline animation
+@mixin link-centered-underline-animation {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover::after {
+    width: 100%;
+    left: 0;
+  }
+}
+
+// Nav centered underline animation (slightly different visual effect)
+@mixin nav-centered-underline-animation {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+  
+  &:hover::after {
+    width: 80%;
+    left: 10%;
+  }
+}
+
+// ==========================================================================
+// Layout Mixins
+// ==========================================================================
+
+// Grid layout
+@mixin grid-layout($min-width: 300px, $gap: 2rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// Timeline item styles
+@mixin timeline-item-base {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+// Timeline dot
+@mixin timeline-dot {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+}
+
+// Responsive container
+@mixin responsive-container($max-width) {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Fixed header styles
+@mixin fixed-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: $z-index-header;
+}
+
+// Flex helpers
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Gradient text
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Math equation box
+@mixin equation-box {
+  background-color: var(--equation-background);
+  border: var(--equation-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+}

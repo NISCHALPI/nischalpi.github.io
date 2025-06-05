@@ -1,11 +1,13 @@
 // Post content specific styles
 .post-content {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem 4rem;
+  padding: 2rem 2rem;
   font-size: 1.1rem;
   line-height: 1.8;
   color: var(--text-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 
   // Headings
   h1, h2, h3, h4, h5, h6 {
@@ -171,14 +173,15 @@
 // Post header styles are now defined within .post class
 
 .post {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
+  overflow: hidden;
   
   .post-header {
     margin-bottom: 3rem;
     text-align: center;
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
     position: relative;
     background: var(--card-bg);
     border-radius: 12px;
@@ -220,9 +223,9 @@
   }
 
   .post-navigation {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 4rem auto 2rem;
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
     border-top: 1px solid var(--border-color);
 
     .post-navigation-links {
@@ -233,37 +236,55 @@
       a {
         display: flex;
         align-items: center;
-        padding: 1rem 1.5rem;
+        padding: 1.25rem 1.75rem;
         background: var(--card-bg);
-        border-radius: 8px;
+        border: 2px solid var(--primary-color);
+        border-radius: 12px;
         text-decoration: none;
         color: var(--text-color);
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         max-width: 300px;
+        font-weight: 500;
+        position: relative;
         
         &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          color: var(--primary-color);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+          background: var(--primary-color);
+          color: white;
         }
 
         &.prev {
           text-align: left;
           &::before {
             content: '←';
-            margin-right: 0.75rem;
-            font-size: 1.2em;
+            margin-right: 1rem;
+            font-size: 1.4em;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+          }
+          
+          &:hover::before {
+            transform: translateX(-4px);
+            color: white;
           }
         }
 
         &.next {
           text-align: right;
           margin-left: auto;
-          &::after {
+          &::before {
             content: '→';
-            margin-left: 0.75rem;
-            font-size: 1.2em;
+            margin-left: 1rem;
+            font-size: 1.4em;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+          }
+          
+          &:hover::before {
+            transform: translateX(4px);
+            color: white;
           }
         }
       }
@@ -271,9 +292,9 @@
   }
 
   .comments {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 3rem auto;
-    padding: 0 4rem;
+    padding: 0 2rem;
 
     h2 {
       margin-bottom: 2rem;

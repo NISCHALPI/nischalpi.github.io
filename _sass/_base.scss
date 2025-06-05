@@ -373,22 +373,8 @@ a:hover {
 
 /* Buttons */
 .button, button, input[type="submit"], input[type="reset"], input[type="button"] {
-  display: inline-block;
-  background-color: var(--button-background);
-  color: var(--button-text) !important; /* Ensure text color overrides link styles if button is an <a> */
-  padding: 0.75rem 1.5rem; /* Larger padding */
-  border: 1px solid transparent; /* Transparent border initially */
-  border-radius: 0.3rem; /* Standard border radius */
-  font-weight: 600; /* Bolder button text */
-  font-size: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
-  text-decoration: none !important; /* Remove underline from <a> tags styled as buttons */
-  line-height: 1.5; /* Ensure consistent line height */
-  white-space: nowrap; /* Prevent wrapping */
-  -webkit-appearance: none; /* Remove default browser styling */
-  -moz-appearance: none;
+  @extend %btn;
+  /* Add any global button overrides here if needed */
   appearance: none;
 }
 

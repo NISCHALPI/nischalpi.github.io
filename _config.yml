@@ -6,7 +6,9 @@ description: "Mathematics PhD Portfolio - Specializing in [Your Math Field]"
 author: "Dr. Math Scholar"
 email: "your.email@example.com"
 logo: "/assets/images/profile.jpg" # for minimal theme
-repository: "username/math-portfolio" # your GitHub username/repo-name
+repository: "username/math-portfolio" # IMPORTANT: Replace this with your actual GitHub username/repo-name
+github:
+  repository_nwo: "username/math-portfolio" # IMPORTANT: Replace this with your actual GitHub username/repo-name
 
 # Build settings
 markdown: kramdown

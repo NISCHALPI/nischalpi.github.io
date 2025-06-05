@@ -2,9 +2,19 @@
 
 // Blog container
 .blog-container {
+  @extend %section-container;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  
+  // Standardize animations for blog elements
+  .page-title,
+  .page-description,
+  .blog-search-container,
+  .featured-post,
+  .post-card {
+    opacity: 0; // Start invisible for consistent animation
+  }
 }
 
 // Search bar
@@ -17,8 +27,8 @@
 
 .search-input-wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
+  @extend %flex-center;
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -102,6 +112,11 @@
 // Featured post
 .featured-post {
   margin-bottom: 1.5rem;  // Reduced margin
+  opacity: 0;  // Start invisible for animation
+  
+  &.animate__animated {
+    opacity: 1;
+  }
 }
 
 .featured-title {
@@ -114,16 +129,14 @@
 }
 
 .featured-post-card {
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  @include card-base;
   padding: 1.5rem;  // Reduced padding
   border-left: 5px solid var(--accent-color, var(--primary-color));
   display: flex;
   flex-direction: column;
   position: relative;
+  border-radius: 12px; // Override card-base border-radius
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); // Override card-base shadow
 
   .featured-post-image {
     position: relative;
@@ -131,9 +144,7 @@
     height: 250px;  // Reduced height from 300px
     margin: -1.5rem -1.5rem 1rem -1.5rem;  // Adjusted margins to match new padding
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %flex-center;
     background-color: var(--background-dark);
     
     &::before {
@@ -171,10 +182,7 @@
     z-index: 1;
   }
   
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  }
+  @include card-hover(-5px);
   
   &::before {
     content: '';
@@ -207,13 +215,13 @@
   &:hover {
     background-color: var(--primary-color-dark);
     transform: translateY(-2px);
+    text-decoration: none;
   }
 }
 
 .featured-post-link {
   color: var(--heading-color);
   text-decoration: none;
-  transition: color 0.2s ease;
   font-size: 1.5rem;
   
   &:hover {
@@ -229,10 +237,7 @@
 
 .featured-post-meta,
 .post-card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
+  @include card-footer(1rem, 0); // margin-top: 1rem, no padding-top
   font-size: 0.875rem;
   color: var(--text-color-soft);
   
@@ -266,20 +271,24 @@
 }
 
 .post-card {
-  background-color: var(--card-bg);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  @include card-base;
+  border-radius: 10px; // Override card-base border-radius
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Override card-base shadow
   display: grid;
   grid-template-columns: 250px 1fr;
   max-width: 100%;
   border-top: 4px solid transparent;  // Default transparent border
   
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  // Consistent animation for cards
+  opacity: 0;
+  transform: translateY(20px);
+  
+  &.animate__animated {
+    opacity: 1;
+    transform: translateY(0);
   }
+  
+  @include card-hover(-5px);
 
   // Featured post modifier
   &--featured {
@@ -321,21 +330,20 @@
 
   // Regular post card styles
   .post-card-image {
+    position: relative;
     width: 100%;
     height: 100%;
     min-height: 180px;
     overflow: hidden;
-    position: relative;
     background-color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %flex-center;
     
     img {
+      position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: all 0.3s ease;
+      transition: transform 0.5s ease;
     }
     
     &:hover img {
@@ -345,16 +353,13 @@
   }
 
   .post-card-content {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
+    @include card-content(1rem); // Use card-content mixin with 1rem padding
     justify-content: space-between;
   }
 
   .post-link {
     color: var(--heading-color);
     text-decoration: none;
-    transition: color 0.2s ease;
     font-size: 1.35rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
@@ -369,42 +374,34 @@
 // Read more button styles
 .read-more-link,
 .featured-read-more-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--accent-color, var(--primary-color));
-  color: var(--card-bg);
+  @extend %btn-primary;
+  font-size: 0.9rem;
   padding: 0.5rem 1.25rem;
-  border-radius: 6px;
   text-decoration: none;
-  font-weight: 500;
-  transition: transform 0.2s ease;
   
   &:hover {
     transform: scale(1.05);
-    text-decoration: none;  // Explicitly remove underline on hover
-    color: var(--card-bg);  // Keep text color consistent on hover
+    text-decoration: none;
   }
 }
 
 /* Base tag styles that apply to both featured and regular posts */
 .post-tag {
+  @include badge-base(0.25rem 0.75rem); // Use badge-base mixin with custom padding
   display: inline-flex;
-  align-items: center;
+  align-items: center; 
   background-color: transparent;
   color: var(--text-color-soft);
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
   border-radius: 50px;
-  text-decoration: none;
   cursor: pointer;
   border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
+  text-decoration: none;
   
   &:hover {
     background-color: var(--hover-bg);
     border-color: var(--text-color-soft);
     transform: translateY(-1px);
+    text-decoration: none;
   }
   
   &.active {
@@ -416,9 +413,7 @@
 // Pagination styles
 .pagination {
   margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
   gap: 0.5rem;
   flex-wrap: wrap;
   padding: 1rem;
@@ -436,10 +431,13 @@
   }
 
   a {
+    @extend .btn;
+    @extend .btn-sm;
     background-color: var(--card-bg);
     color: var(--text-color);
-    text-decoration: none;
     border: 1px solid var(--border-color);
+    padding: 0;
+    min-width: 2.5rem;
     
     &:hover {
       background-color: var(--accent-color, var(--primary-color));
@@ -449,13 +447,15 @@
   }
 
   .pagination-current {
-    background-color: var(--accent-color, var(--primary-color));
-    color: var(--card-bg);
+    @extend .btn;
+    @extend .btn-sm;
+    @extend .btn-primary;
+    padding: 0;
+    min-width: 2.5rem;
   }
 
   .button {
     padding: 0 1rem;
-    font-weight: 500;
   }
 }
 

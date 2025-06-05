@@ -9,6 +9,44 @@ document.addEventListener('DOMContentLoaded', function() {
   const featuredPost = document.querySelector('.featured-post');
   const postsCount = document.getElementById('posts-count');
   
+  // Initialize animations for blog elements with staggered timing
+  function initBlogAnimations() {
+    // Animate title and description
+    const pageTitle = document.querySelector('.page-title');
+    const pageDesc = document.querySelector('.page-description');
+    const searchContainer = document.querySelector('.blog-search-container');
+    
+    if (pageTitle) {
+      pageTitle.classList.add('animate__animated', 'animate__fadeInDown');
+      pageTitle.style.animationDelay = '0ms';
+    }
+    
+    if (pageDesc) {
+      pageDesc.classList.add('animate__animated', 'animate__fadeIn');
+      pageDesc.style.animationDelay = '200ms';
+    }
+    
+    if (searchContainer) {
+      searchContainer.classList.add('animate__animated', 'animate__fadeIn');
+      searchContainer.style.animationDelay = '400ms';
+    }
+    
+    // Featured post animation
+    if (featuredPost) {
+      featuredPost.classList.add('animate__animated', 'animate__fadeIn');
+      featuredPost.style.animationDelay = '600ms';
+    }
+    
+    // Stagger post card animations
+    postCards.forEach((card, index) => {
+      card.classList.add('animate__animated', 'animate__fadeInUp');
+      card.style.animationDelay = (600 + (index * 100)) + 'ms';
+    });
+  }
+  
+  // Run the animations initialization
+  initBlogAnimations();
+  
   // Set initial posts count
   updatePostsCount();
   
@@ -43,22 +81,38 @@ document.addEventListener('DOMContentLoaded', function() {
     let matchCount = 0;
     
     if (query.length === 0) {
-      postCards.forEach(card => card.style.display = '');
-      if (featuredPost) featuredPost.style.display = '';
+      // Reset all animations and visibility when clearing search
+      postCards.forEach((card, i) => {
+        card.style.display = '';
+        // Re-animate cards with staggered delay when returning to full view
+        setTimeout(() => {
+          card.classList.add('animate__animated', 'animate__fadeInUp');
+          card.style.animationDelay = (i * 100) + 'ms';
+        }, 50);
+      });
+      if (featuredPost) {
+        featuredPost.style.display = '';
+        featuredPost.classList.add('animate__animated', 'animate__fadeIn');
+      }
       updatePostsCount();
       return;
     }
     
-    postCards.forEach(card => {
+    postCards.forEach((card, i) => {
       const title = card.getAttribute('data-title') || '';
       const content = card.getAttribute('data-content') || '';
       const tags = card.getAttribute('data-tags') || '';
       
       if (title.includes(query) || content.includes(query) || tags.includes(query)) {
         card.style.display = '';
+        // Animate matching cards with consistent but staggered animation
+        card.classList.add('animate__animated', 'animate__fadeInUp');
+        card.style.animationDelay = (matchCount * 100) + 'ms';
         matchCount++;
       } else {
         card.style.display = 'none';
+        // Remove animation classes from hidden cards
+        card.classList.remove('animate__animated', 'animate__fadeInUp');
       }
     });
     

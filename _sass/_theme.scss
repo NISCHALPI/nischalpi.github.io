@@ -46,9 +46,6 @@
   --equation-background: #{$equation-background};
   --equation-border: #{$equation-border};
   --math-accent-color: #{$math-accent-color};
-  
-  // Add smooth transition for theme switch
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 // Dark theme styles
@@ -76,9 +73,19 @@
 }
 
 // Apply theme variables to elements
+html {
+  // Apply smooth transition for theme switch
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Theme transition class is applied to HTML element immediately
+html.theme-applied {
+  background-color: var(--background-color);
+}
+
 body {
-  background-color: var(--background-color) !important;
-  color: var(--text-color) !important;
+  background-color: var(--background-color);
+  color: var(--text-color);
   min-height: 100vh; // Ensure full viewport coverage
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -104,9 +111,9 @@ code {
   background-color: var(--code-background);
 }
 
-// Add theme transition class
+// Add theme transition class - applied to HTML and body elements
 .theme-transition {
-  transition: var(--transition-standard);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 // Theme toggle button styles
