@@ -1,0 +1,55 @@
+---
+permalink: /404.html
+layout: default
+title: "404: Page not found"
+---
+
+<div class="page-not-found animate__animated animate__fadeIn">
+  <h1>404: Page not found</h1>
+  
+  <div class="math-equation">
+    <p>It seems the function $f(x)$ is not defined at $x = \text{this-page}$</p>
+    
+    $$\lim_{x \to \text{this-page}} f(x) = \text{undefined}$$
+  </div>
+  
+  <p>The page you were looking for doesn't exist. You may have mistyped the address or the page may have moved.</p>
+  
+  <div class="suggestions">
+    <h2>You might want to check out:</h2>
+    <ul>
+      <li><a href="{{ site.baseurl }}/">Home</a></li>
+      <li><a href="{{ site.baseurl }}/research">Research</a></li>
+      <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+      <li><a href="{{ site.baseurl }}/teaching">Teaching</a></li>
+      <li><a href="{{ site.baseurl }}/books">Books & Resources</a></li>
+      <li><a href="{{ site.baseurl }}/contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .page-not-found {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  
+  .math-equation {
+    margin: 3rem 0;
+    font-size: 1.2rem;
+  }
+  
+  .suggestions {
+    margin: 3rem auto;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .suggestions ul {
+    padding-left: 1rem;
+  }
+  
+  .suggestions li {
+    margin-bottom: 0.5rem;
+  }
+</style>

@@ -1,0 +1,90 @@
+# Site configuration for mathematics PhD portfolio
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/math-portfolio" # the subpath of your site, e.g. /blog
+title: "Dr. Math Scholar" # the name of your site, e.g. ACME Corp.
+description: "Mathematics PhD Portfolio - Specializing in [Your Math Field]"
+author: "Dr. Math Scholar"
+email: "your.email@example.com"
+logo: "/assets/images/profile.jpg" # for minimal theme
+repository: "username/math-portfolio" # your GitHub username/repo-name
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-scholar
+  - jekyll-paginate
+
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed
+  load_paths:
+    - _sass
+    - node_modules
+
+# Theme settings
+# For local development:
+theme: minima
+# For GitHub Pages (uncomment when deploying):
+# theme: jekyll-theme-minimal
+# remote_theme: pages-themes/minimal@v0.2.0
+
+# Navigation
+header_pages:
+  - index.md
+  - research.md
+  - blog.md
+  - teaching.md
+  - books.md
+  - contact.md
+
+# Social media
+social:
+  - platform: github
+    user_url: https://github.com/username
+  - platform: google_scholar
+    user_url: https://scholar.google.com/citations?user=YOUR_ID
+  - platform: linkedin
+    user_url: https://linkedin.com/in/username
+  - platform: orcid
+    user_url: https://orcid.org/0000-0000-0000-0000
+    
+# Pagination
+paginate: 5
+paginate_path: "/blog/page:num/index.html"
+
+# Math settings - enable MathJax
+mathjax: true
+
+# Scholar settings for publications
+scholar:
+  style: apa
+  locale: en
+  sort_by: year,month
+  order: descending
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: "{{reference}}"
+  replace_strings: true
+  join_strings: true
+  details_dir: bibliography
+  details_layout: bibtex.html
+  details_link: Details
+  query: "@*"
+
+# Google Analytics
+google_analytics: ""
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - DOCUMENTATION.md
+  - TODO.md
+  - serve.sh
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle

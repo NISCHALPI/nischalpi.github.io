@@ -1,0 +1,77 @@
+// Variables for both light and dark theme modes
+
+// Color scheme
+$primary-color: #3b82f6; // Modern blue
+$primary-color-dark: #2563eb;
+$primary-color-rgb: 59, 130, 246; // RGB values for primary color
+$secondary-color: #10b981; // Emerald green for mathematics
+$secondary-color-rgb: 16, 185, 129; // RGB values for secondary color
+$accent-color: #8b5cf6; // Purple accent for math expressions
+$accent-color-rgb: 139, 92, 246; // RGB values for accent color
+
+// Theme colors - Light Mode
+$light-theme: (
+  background-color: #f9fafb,
+  surface-color: #ffffff,
+  text-color: #1e293b,
+  text-color-soft: #64748b,
+  heading-color: #0f172a,
+  border-color: #e2e8f0,
+  selection-background: rgba(59, 130, 246, 0.2),
+  selection-text: #1e293b,
+  code-background: #f1f5f9,
+  card-background: #ffffff,
+  card-shadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  hover-background: rgba(59, 130, 246, 0.05),
+  scrollbar-thumb: rgba(15, 23, 42, 0.2),
+  scrollbar-track: rgba(241, 245, 249, 0.8)
+);
+
+// Theme colors - Dark Mode
+$dark-theme: (
+  background-color: #0f172a,
+  surface-color: #1e293b,
+  text-color: #e2e8f0,
+  text-color-soft: #94a3b8,
+  heading-color: #f1f5f9,
+  border-color: #334155,
+  selection-background: rgba(59, 130, 246, 0.3),
+  selection-text: #f1f5f9,
+  code-background: #1e293b,
+  card-background: #1e293b,
+  card-shadow: "0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)",
+  hover-background: rgba(59, 130, 246, 0.15),
+  scrollbar-thumb: rgba(241, 245, 249, 0.3),
+  scrollbar-track: rgba(15, 23, 42, 0.8)
+);
+
+// Typography
+$font-stack-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font-stack-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+$font-stack-serif: 'Georgia', 'Times New Roman', serif;
+
+// UI Elements
+$border-radius-sm: 0.25rem;
+$border-radius: 0.5rem;
+$border-radius-lg: 1rem;
+$box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.2s ease;
+
+// Z-index system
+$z-index-header: 1000;
+$z-index-dropdown: 900;
+$z-index-modal: 1100;
+$z-index-tooltip: 1200;
+
+// Responsive breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Math-focused style variables
+$equation-background: rgba(139, 92, 246, 0.05);
+$equation-border: 1px solid rgba(139, 92, 246, 0.2);
+$math-accent-color: #8b5cf6;

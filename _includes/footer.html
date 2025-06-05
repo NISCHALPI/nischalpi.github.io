@@ -1,0 +1,61 @@
+<footer class="site-footer animate__animated animate__fadeIn">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+        <p>{{ site.description | escape }}</p>
+      </div>
+      <div class="footer-col">
+        <h2 class="footer-heading">Connect</h2>
+        <ul class="social-media-list">
+          {%- for social in site.social -%}
+            <li>
+              <a href="{{ social.user_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-{{ social.platform | downcase }}"></i>
+                <span class="username">{{ social.platform | capitalize }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // Add animation classes to elements when they enter viewport
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('animate__animated', element.dataset.animation || 'animate__fadeIn');
+        }
+      });
+    };
+    
+    // Run on scroll
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Run once on page load
+    animateOnScroll();
+  });
+</script>

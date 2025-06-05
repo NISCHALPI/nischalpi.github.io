@@ -1,0 +1,642 @@
+// Base styles (resets, html/body, etc.) from main.scss and enhanced-styles.scss are consolidated here.
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base font size */
+  height: 100%;
+  scroll-padding-top: 80px; /* For anchor links - header height + padding */
+}
+
+body {
+  font-family: var(--font-family-sans-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, 
+      rgba(var(--primary-color-rgb), 0.05) 0%, 
+      transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+/* Selection styling */
+::selection {
+  background: var(--selection-background);
+  color: var(--selection-text);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  margin-top: 2em; /* More space above headings */
+  margin-bottom: 0.75em; /* Slightly more space below */
+  font-weight: 700; /* Bolder headings */
+  line-height: 1.3;
+  letter-spacing: -0.02em; /* Subtle letter spacing */
+}
+
+h1 {
+  font-size: 2.5rem; /* Slightly larger h1 */
+}
+
+h2 {
+  font-size: 2rem; /* Slightly larger h2 */
+  border-bottom: 2px solid var(--border-color); /* Thicker border */
+  padding-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+  color: var(--blockquote-color);
+  text-transform: uppercase; /* Uppercase for h6 for a stylistic choice */
+  letter-spacing: 0.05em;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.25em; /* More space between paragraphs */
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  text-decoration-thickness: 0.08em; /* Thicker underline */
+  text-underline-offset: 0.15em; /* More space between text and underline */
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+  text-decoration-color: var(--link-hover-color); /* Ensure underline color changes on hover */
+}
+
+/* Layout */
+.wrapper {
+  max-width: 1140px; /* Common container width */
+  margin: 0 auto;
+  padding: 0 1.5rem; /* More padding for smaller screens */
+}
+
+.page-content {
+  padding: 2.5rem 0; /* More padding */
+  min-height: calc(100vh - 200px); /* Adjusted for potentially taller header/footer */
+  animation: fadeIn 0.5s ease-out; /* Fade in animation for page content */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--navbar-background);
+  padding: 1rem 0; /* Consistent padding */
+  position: sticky;
+  top: 0;
+  z-index: 1020; /* Higher z-index for Bootstrap compatibility */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Softer shadow */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.site-header .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.75rem; /* Larger site title */
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--heading-color); /* Ensure title uses heading color */
+  transition: color 0.3s ease;
+}
+.site-title:hover {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav .page-link {
+  margin-left: 1.75rem; /* More space between nav links */
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-color); /* Use text color for nav links */
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+
+.site-nav .page-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--link-color);
+  transition: width 0.3s ease;
+}
+
+.site-nav .page-link:hover::after,
+.site-nav .page-link.active::after { /* Style for active page link */
+  width: 100%;
+}
+
+.site-nav .page-link:hover {
+  color: var(--link-color); /* Link color on hover */
+  text-decoration: none;
+}
+.site-nav .page-link.active {
+    color: var(--link-color);
+    font-weight: 700;
+}
+
+
+.site-nav .nav-trigger {
+  display: none;
+}
+
+.site-nav .menu-icon {
+  display: none; /* Will be handled by main.scss for responsiveness */
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: transparent; /* Fully transparent */
+  border: 1px solid var(--border-color); /* Subtle border */
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.25rem; /* Slightly larger */
+  margin-left: 1.75rem;
+  padding: 0.5rem; /* More padding */
+  border-radius: 50%; /* Circular button */
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(10deg); /* More playful hover */
+  background-color: var(--code-background); /* Subtle background on hover */
+  border-color: var(--link-color);
+}
+.theme-toggle:active {
+  transform: translateY(0px) rotate(0deg);
+}
+
+/* Theme toggle icon handling moved to _theme.scss */
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  background-color: var(--footer-background);
+  padding: 3rem 0; /* More padding */
+  margin-top: 3rem;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-col-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Better distribution of columns */
+  gap: 2rem; /* Gap between columns */
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px; /* Minimum width for columns */
+  margin-bottom: 1.5rem; /* Space for stacked columns on mobile */
+}
+
+.footer-heading {
+  font-size: 1.1rem; /* Slightly smaller footer heading */
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+  font-weight: 600;
+}
+
+.social-media-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Horizontal social icons */
+  gap: 0.75rem; /* Space between icons */
+}
+
+.social-media-list li {
+  margin-bottom: 0; /* Remove bottom margin as they are inline */
+}
+
+.social-media-list a {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 1.5rem; /* Larger icons */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-media-list a:hover {
+  color: var(--link-color);
+  transform: scale(1.1); /* Slight zoom on hover */
+  text-decoration: none;
+}
+
+.social-media-list i {
+  margin-right: 0; /* Remove margin as icons are standalone */
+  width: auto;
+  text-align: center;
+}
+
+.copyright {
+  margin-top: 2.5rem;
+  font-size: 0.9rem; /* Slightly larger copyright text */
+  color: var(--blockquote-color);
+  text-align: center; /* Center copyright */
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color); /* Add border to cards */
+  border-radius: 0.5rem; /* Slightly larger border radius */
+  box-shadow: var(--card-shadow);
+  padding: 2rem; /* More padding inside cards */
+  margin-bottom: 2rem;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease;
+  overflow: hidden; /* Ensure content respects border radius */
+}
+
+.card:hover {
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  border-color: var(--link-color); /* Highlight border on hover */
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+.card-text {
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+  display: inline-block;
+  background-color: var(--button-background);
+  color: var(--button-text) !important; /* Ensure text color overrides link styles if button is an <a> */
+  padding: 0.75rem 1.5rem; /* Larger padding */
+  border: 1px solid transparent; /* Transparent border initially */
+  border-radius: 0.3rem; /* Standard border radius */
+  font-weight: 600; /* Bolder button text */
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  text-decoration: none !important; /* Remove underline from <a> tags styled as buttons */
+  line-height: 1.5; /* Ensure consistent line height */
+  white-space: nowrap; /* Prevent wrapping */
+  -webkit-appearance: none; /* Remove default browser styling */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+  background-color: var(--link-hover-color); /* Use link hover color for consistency */
+  border-color: var(--link-hover-color);
+  color: var(--button-text) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active {
+  transform: translateY(0px); /* Press down effect */
+}
+
+
+/* Secondary Button Style */
+.button-secondary, .btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--button-text) !important;
+}
+.button-secondary:hover, .btn-secondary:hover {
+  background-color: var(--dark-color); /* Darken secondary color on hover */
+  border-color: var(--dark-color);
+}
+[data-theme="dark"] .button-secondary, [data-theme="dark"] .btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--dark-color) !important;
+}
+[data-theme="dark"] .button-secondary:hover, [data-theme="dark"] .btn-secondary:hover {
+  background-color: var(--light-color);
+  border-color: var(--light-color);
+  color: var(--dark-color) !important;
+}
+
+
+/* Code blocks and inline code */
+pre, code, tt {
+  font-family: var(--font-family-monospace);
+  font-size: 0.9em; /* Slightly smaller for differentiation */
+  border-radius: 0.3rem; /* Consistent border radius */
+  background-color: var(--code-background);
+  color: var(--text-color); /* Ensure code text has contrast */
+  padding: 0.2em 0.4em;
+  border: 1px solid var(--border-color); /* Subtle border for code elements */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+pre {
+  padding: 1.25rem; /* More padding in pre blocks */
+  overflow-x: auto; /* Ensure horizontal scroll for long lines */
+  margin-bottom: 1.5rem; /* Space below code blocks */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Inner shadow for depth */
+}
+
+pre code, pre tt {
+  padding: 0;
+  background-color: transparent; /* Code inside pre shouldn't have its own background */
+  border: none; /* Nor its own border */
+  color: inherit; /* Inherit color from pre */
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 0 0 1.5rem 0; /* Consistent bottom margin */
+  padding: 1rem 1.5rem; /* Padding inside blockquote */
+  border-left: 4px solid var(--link-color); /* Prominent left border */
+  background-color: var(--code-background); /* Subtle background */
+  color: var(--blockquote-color);
+  font-style: italic;
+  border-radius: 0 0.3rem 0.3rem 0; /* Rounded corners on the right */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0; /* Remove bottom margin from last paragraph in blockquote */
+}
+
+/* Tables */
+table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse; /* Cleaner table lines */
+  border: 1px solid var(--table-border-color);
+  transition: border-color 0.3s ease;
+}
+
+th, td {
+  padding: 0.75rem 1rem; /* More padding in cells */
+  border: 1px solid var(--table-border-color);
+  text-align: left;
+  transition: border-color 0.3s ease;
+}
+
+thead th {
+  background-color: var(--table-header-background);
+  font-weight: 600; /* Bolder table headers */
+  color: var(--heading-color);
+  border-bottom-width: 2px; /* Thicker bottom border for header */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--card-background); /* Subtle striping for readability */
+  transition: background-color 0.3s ease;
+}
+[data-theme="dark"] tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.03); /* Very subtle striping for dark mode */
+}
+
+
+tbody tr:hover {
+  background-color: var(--code-background); /* Highlight row on hover */
+}
+[data-theme="dark"] tbody tr:hover {
+  background-color: rgba(255,255,255,0.07);
+}
+
+
+/* Horizontal Rules */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 3rem 0; /* More vertical space around hr */
+  transition: background-color 0.3s ease;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.3rem; /* Consistent border radius for images */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for images */
+  transition: box-shadow 0.3s ease;
+}
+img:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.hidden { display: none; }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Spacing utilities (simple version) */
+.mt-1 { margin-top: 0.25rem !important; }
+.mt-2 { margin-top: 0.5rem !important; }
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mt-5 { margin-top: 3rem !important; }
+
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+
+.pt-1 { padding-top: 0.25rem !important; }
+.pt-2 { padding-top: 0.5rem !important; }
+.pt-3 { padding-top: 1rem !important; }
+.pt-4 { padding-top: 1.5rem !important; }
+.pt-5 { padding-top: 3rem !important; }
+
+.pb-1 { padding-bottom: 0.25rem !important; }
+.pb-2 { padding-bottom: 0.5rem !important; }
+.pb-3 { padding-bottom: 1rem !important; }
+.pb-4 { padding-bottom: 1.5rem !important; }
+.pb-5 { padding-bottom: 3rem !important; }
+
+/* Alert/Message Boxes */
+.alert {
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+.alert-info {
+  color: var(--info-color);
+  background-color: var(--code-background); /* Use code background for subtle alerts */
+  border-color: var(--info-color);
+}
+[data-theme="dark"] .alert-info {
+  color: var(--info-color);
+  background-color: var(--code-background);
+  border-color: var(--info-color);
+}
+.alert-success {
+  color: var(--success-color);
+  background-color: var(--code-background);
+  border-color: var(--success-color);
+}
+[data-theme="dark"] .alert-success {
+  color: var(--success-color);
+  background-color: var(--code-background);
+  border-color: var(--success-color);
+}
+.alert-warning {
+  color: var(--warning-color);
+  background-color: var(--code-background);
+  border-color: var(--warning-color);
+}
+[data-theme="dark"] .alert-warning {
+  color: var(--warning-color);
+  background-color: var(--code-background);
+  border-color: var(--warning-color);
+}
+.alert-danger {
+  color: var(--danger-color);
+  background-color: var(--code-background);
+  border-color: var(--danger-color);
+}
+[data-theme="dark"] .alert-danger {
+  color: var(--danger-color);
+  background-color: var(--code-background);
+  border-color: var(--danger-color);
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--link-color);
+  color: white;
+  padding: 8px;
+  z-index: 1030; /* Above header */
+  transition: top 0.3s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Print styles - basic improvements */
+@media print {
+  body {
+    background-color: #fff !important; /* Ensure white background for printing */
+    color: #000 !important; /* Ensure black text */
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .site-header, .site-footer, .theme-toggle, .comments, .no-print {
+    display: none !important;
+  }
+
+  .wrapper {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+
+  a[href^="http://"]:after, a[href^="https://"]:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+
+  img {
+    max-width: 100% !important; /* Ensure images don't overflow */
+    page-break-inside: avoid;
+  }
+
+  pre, blockquote {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid; /* Avoid breaking pages after headings */
+  }
+}

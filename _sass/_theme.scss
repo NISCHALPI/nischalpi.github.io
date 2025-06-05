@@ -1,0 +1,146 @@
+// Theme handling logic and CSS variable assignments
+
+// Import variables first to use them
+@import "variables";
+
+// Define CSS variables for the light theme
+:root {
+  // Light theme defaults (from $light-theme map)
+  --background-color: #{map-get($light-theme, 'background-color')};
+  --surface-color: #{map-get($light-theme, 'surface-color')};
+  --text-color: #{map-get($light-theme, 'text-color')};
+  --text-color-soft: #{map-get($light-theme, 'text-color-soft')};
+  --heading-color: #{map-get($light-theme, 'heading-color')};
+  --border-color: #{map-get($light-theme, 'border-color')};
+  --selection-background: #{map-get($light-theme, 'selection-background')};
+  --selection-text: #{map-get($light-theme, 'selection-text')};
+  --code-background: #{map-get($light-theme, 'code-background')};
+  --card-background: #{map-get($light-theme, 'card-background')};
+  --card-shadow: #{map-get($light-theme, 'card-shadow')};
+  --hover-background: #{map-get($light-theme, 'hover-background')};
+  --scrollbar-thumb: #{map-get($light-theme, 'scrollbar-thumb')};
+  --scrollbar-track: #{map-get($light-theme, 'scrollbar-track')};
+
+  // Link colors for light theme
+  --link-color: #{$primary-color};
+  --link-hover-color: #{$primary-color-dark};
+  --blockquote-color: #{map-get($light-theme, 'text-color-soft')};
+  
+  // Non-theme-specific variables
+  --primary-color: #{$primary-color};
+  --primary-color-dark: #{$primary-color-dark};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --font-family-sans-serif: #{$font-stack-sans};
+  --font-family-mono: #{$font-stack-mono};
+  --font-family-serif: #{$font-stack-serif};
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius: #{$border-radius};
+  --border-radius-lg: #{$border-radius-lg};
+  --box-shadow: #{$box-shadow};
+  --box-shadow-hover: #{$box-shadow-hover};
+  --transition-standard: #{$transition-standard};
+  --transition-fast: #{$transition-fast};
+  --equation-background: #{$equation-background};
+  --equation-border: #{$equation-border};
+  --math-accent-color: #{$math-accent-color};
+  
+  // Add smooth transition for theme switch
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Class for handling theme transitions
+.theme-transition {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+// Dark theme with CSS variables
+[data-theme="dark"] {
+  --background-color: #{map-get($dark-theme, 'background-color')};
+  --surface-color: #{map-get($dark-theme, 'surface-color')};
+  --text-color: #{map-get($dark-theme, 'text-color')};
+  --text-color-soft: #{map-get($dark-theme, 'text-color-soft')};
+  --heading-color: #{map-get($dark-theme, 'heading-color')};
+  --border-color: #{map-get($dark-theme, 'border-color')};
+  --selection-background: #{map-get($dark-theme, 'selection-background')};
+  --selection-text: #{map-get($dark-theme, 'selection-text')};
+  --code-background: #{map-get($dark-theme, 'code-background')};
+  --card-background: #{map-get($dark-theme, 'card-background')};
+  --card-shadow: #{map-get($dark-theme, 'card-shadow')};
+  --hover-background: #{map-get($dark-theme, 'hover-background')};
+  --scrollbar-thumb: #{map-get($dark-theme, 'scrollbar-thumb')};
+  --scrollbar-track: #{map-get($dark-theme, 'scrollbar-track')};
+  
+  // Link colors for dark theme
+  --link-color: #{lighten($primary-color, 15%)};
+  --link-hover-color: #{lighten($primary-color, 25%)};
+  --blockquote-color: #{map-get($dark-theme, 'text-color-soft')};
+  
+  // Ensure math content is visible in dark mode
+  --equation-background: rgba(139, 92, 246, 0.1);
+  --equation-border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+// Theme toggle button styles
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: 1rem;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: var(--hover-background);
+  }
+  
+  .fa-sun {
+    display: none;
+  }
+  
+  .fa-moon {
+    display: inline-block;
+  }
+}
+
+// Show/hide appropriate icon based on theme
+[data-theme="dark"] .theme-toggle {
+  .fa-sun {
+    display: inline-block;
+  }
+  
+  .fa-moon {
+    display: none;
+  }
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color-soft);
+}

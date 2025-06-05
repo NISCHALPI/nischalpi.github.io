@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  {%- include head.html -%}
+  <body>
+    <!-- Progress bar for scrolling -->
+    <div class="scroll-indicator-container">
+      <div class="scroll-indicator"></div>
+    </div>
+
+    {%- include header.html -%}
+    
+    <main class="page-content animate__animated animate__fadeIn" aria-label="Content">
+      <div class="wrapper stagger-items">
+        {{ content }}
+      </div>
+    </main>
+    
+    {%- include footer.html -%}
+    
+    <!-- Custom cursor -->
+    <div class="custom-cursor"></div>
+  </body>
+</html>

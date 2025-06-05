@@ -1,0 +1,76 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name animate__animated animate__fadeIn" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}
+      
+      {%- if page.categories -%}
+      <span class="post-categories">
+        • Categories: 
+        {% for category in page.categories %}
+        <span class="post-card-category">{{ category }}</span>
+        {% endfor %}
+      </span>
+      {%- endif -%}
+    </p>
+  </header>
+
+  <div class="post-content e-content animate-on-scroll" data-animation="animate__fadeIn" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <div class="post-navigation">
+    <div class="post-navigation-links">
+      {% if page.previous.url %}
+        <a class="prev" href="{{page.previous.url | relative_url}}">&laquo; {{page.previous.title}}</a>
+      {% endif %}
+      {% if page.next.url %}
+        <a class="next" href="{{page.next.url | relative_url}}">{{page.next.title}} &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="utterances-container" class="utterances-frame"></div>
+    <script src="https://utteranc.es/client.js"
+        repo="{{ site.repository }}"
+        issue-term="pathname"
+        label="comment"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+    </script>
+    <script>
+      // Update utterances theme when site theme changes
+      const observer = new MutationObserver(function(mutations) {
+        const utterancesFrame = document.querySelector('.utterances-frame iframe');
+        if (utterancesFrame) {
+          const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light';
+          const message = {
+            type: 'set-theme',
+            theme: theme
+          };
+          utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+      });
+      
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    </script>
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

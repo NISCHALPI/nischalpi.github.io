@@ -1,0 +1,58 @@
+// Grid system styles from main.scss and enhanced-styles.scss are consolidated here.
+
+$grid-gutter-width: 30px !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+.container {
+  width: 100%;
+  padding-right: $grid-gutter-width;
+  padding-left: $grid-gutter-width;
+  margin-right: auto;
+  margin-left: auto;
+
+  @for $i from 1 through length($grid-breakpoints) {
+    $breakpoint: nth(map-keys($grid-breakpoints), $i);
+    $width: map-get($grid-breakpoints, $breakpoint);
+
+    @if $breakpoint != xs {
+      @media (min-width: $width) {
+        max-width: $width;
+      }
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$grid-gutter-width;
+  margin-left: -$grid-gutter-width;
+}
+
+.col,
+.column {
+  position: relative;
+  width: 100%;
+  padding-right: $grid-gutter-width;
+  padding-left: $grid-gutter-width;
+
+  @for $i from 1 through length($grid-breakpoints) {
+    $breakpoint: nth(map-keys($grid-breakpoints), $i);
+    $width: map-get($grid-breakpoints, $breakpoint);
+
+    @if $breakpoint != xs {
+      @media (min-width: $width) {
+        flex: 0 0 auto;
+        width: ($width / 1200px) * 100%;
+        max-width: ($width / 1200px) * 100%;
+      }
+    }
+  }
+}
