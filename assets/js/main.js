@@ -360,4 +360,47 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   initTooltips();
+  
+  // Resource section navigation
+  function scrollSection(button, direction) {
+    const section = button.closest('.resources-section');
+    const grid = section.querySelector('.resource-grid');
+    const cardWidth = 300 + 32; // card width + gap
+    const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
+    
+    grid.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+    
+    // Update button states after scroll
+    setTimeout(() => {
+      const prevBtn = section.querySelector('.prev');
+      const nextBtn = section.querySelector('.next');
+      
+      prevBtn.disabled = grid.scrollLeft <= 0;
+      nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth;
+    }, 300);
+  }
+  
+  // Initialize resource navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.resources-section');
+    sections.forEach(section => {
+      const grid = section.querySelector('.resource-grid');
+      const prevBtn = section.querySelector('.prev');
+      const nextBtn = section.querySelector('.next');
+      
+      if (grid && prevBtn && nextBtn) {
+        prevBtn.disabled = true; // Initially disable prev button
+        nextBtn.disabled = grid.scrollWidth <= grid.clientWidth; // Disable next if no overflow
+        
+        // Update button states on resize
+        window.addEventListener('resize', () => {
+          prevBtn.disabled = grid.scrollLeft <= 0;
+          nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth;
+        });
+      }
+    });
+  });
 });
