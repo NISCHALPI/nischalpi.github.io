@@ -4,6 +4,7 @@ title: "Applying Topology to Data Science"
 date: 2025-04-22
 categories: Applied-Mathematics Data-Science
 mathjax: true
+featured: true
 ---
 
 # Applying Topology to Data Science
