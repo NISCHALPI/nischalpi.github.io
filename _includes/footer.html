@@ -11,7 +11,15 @@
           {%- for social in site.social -%}
             <li>
               <a href="{{ social.user_url }}" title="{{ social.platform }}" target="_blank" rel="noopener noreferrer">
+                {% if social.platform == 'google_scholar' %}
+                <i class="ai ai-google-scholar"></i>
+                {% elsif social.platform == 'orcid' %}
+                <i class="ai ai-orcid"></i>
+                {% elsif social.platform == 'researchgate' %}
+                <i class="ai ai-researchgate"></i>
+                {% else %}
                 <i class="fab fa-{{ social.platform | downcase }}"></i>
+                {% endif %}
                 <span class="username">{{ social.platform | capitalize }}</span>
               </a>
             </li>

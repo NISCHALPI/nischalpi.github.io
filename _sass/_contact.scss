@@ -1,0 +1,356 @@
+// Contact section styles
+.contact-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color-soft);
+  }
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-info {
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: var(--background-alt);
+    }
+    
+    i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-right: 1rem;
+      width: 2rem;
+      text-align: center;
+    }
+    
+    .contact-details {
+      flex: 1;
+      
+      h4 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+      
+      p {
+        margin: 0;
+        line-height: 1.6;
+        color: var(--text-color-soft);
+        
+        a {
+          color: var(--primary-color);
+          text-decoration: none;
+          transition: color 0.3s ease;
+          
+          &:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+.contact-form-container {
+  padding: 2rem;
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--border-radius);
+      background-color: var(--input-background);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      
+      &:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+      }
+      
+      &::placeholder {
+        color: var(--text-color-soft);
+        opacity: 0.7;
+      }
+    }
+    
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    
+    &:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Office hours list
+.office-hours {
+  margin: 0;
+  dt {
+    float: left;
+    clear: left;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    color: var(--text-color);
+  }
+  dd {
+    margin-bottom: 0.5rem;
+    color: var(--text-color-soft);
+    &.note {
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+  }
+}
+
+// Academic Profiles
+.academic-profiles {
+  margin-top: 3rem;
+  
+  p {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    
+    .profile-link {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: var(--card-background);
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      
+      i {
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+        color: var(--primary-color);
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        background-color: var(--background-alt);
+        transform: translateY(-2px);
+        
+        i {
+          transform: scale(1.1);
+        }
+      }
+      
+      // Platform-specific colors on hover
+      &:hover i {
+        &.fa-google-scholar { color: #4285f4; }
+        &.fa-researchgate { color: #00ccbb; }
+        &.fa-orcid { color: #a6ce39; }
+        &.fa-linkedin { color: #0077b5; }
+        &.fa-github { color: #333; }
+      }
+    }
+  }
+}
+
+// Location section
+.location {
+  margin-top: 3rem;
+  
+  .map-placeholder {
+    background-color: var(--background-alt);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin: 1.5rem 0;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: var(--text-color-soft);
+  }
+  
+  h4 {
+    margin: 1.5rem 0 1rem;
+  }
+  
+  p {
+    color: var(--text-color-soft);
+    line-height: 1.6;
+  }
+}
+
+// Prospective Students section
+.prospective-info {
+  margin-top: 3rem;
+  
+  h3 {
+    margin-bottom: 1.25rem;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+    
+    li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-color-soft);
+      
+      &:before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  p {
+    color: var(--text-color-soft);
+    line-height: 1.6;
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-bottom-color: var(--primary-color);
+      }
+    }
+  }
+}
+
+// Dark mode specific styles
+.dark {
+  .contact-info .contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .contact-form-container {
+    input,
+    textarea {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      
+      &:focus {
+        border-color: var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+  
+  .profile-links .profile-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .map-placeholder {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .prospective-info {
+    ul li:before {
+      color: var(--accent-color);
+    }
+  }
+}
+
+// Animation enhancements
+.contact-methods {
+  opacity: 0;
+  animation: slideUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .contact-info {
+    margin-bottom: 2rem;
+  }
+  
+  .contact-form-container {
+    padding: 1.5rem;
+  }
+  
+  .contact-item {
+    padding: 0.75rem;
+    
+    i {
+      font-size: 1.25rem;
+    }
+  }
+}
