@@ -5,6 +5,7 @@ date: 2025-04-22
 categories: Applied-Mathematics Data-Science
 mathjax: true
 featured: true
+image: /assets/images/equations.jpg
 ---
 
 # Applying Topology to Data Science

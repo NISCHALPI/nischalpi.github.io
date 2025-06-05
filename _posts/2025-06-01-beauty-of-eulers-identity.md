@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: Mathematical-Analysis
 mathjax: true
 featured: true
+image: /assets/images/equations.jpg
 ---
 
 # The Beauty of Euler's Identity

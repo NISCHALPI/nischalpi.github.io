@@ -35,6 +35,11 @@ pagination:
   <div class="featured-post animate-on-scroll" data-animation="animate__fadeIn">
     <h2 class="featured-title">Featured Post</h2>
     <div class="featured-post-card">
+      {% if featured_post.image %}
+      <div class="featured-post-image">
+        <img src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title }}">
+      </div>
+      {% endif %}
       <div class="featured-post-content">
         <h3>
           <a class="featured-post-link" href="{{ featured_post.url | relative_url }}">
@@ -71,17 +76,19 @@ pagination:
         {%- for post in paginator.posts -%}
           {%- unless post.url == featured_post.url -%}
           <div class="card post-card animate-on-scroll" data-animation="animate__fadeInUp" data-tags="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}" data-title="{{ post.title | escape | downcase }}" data-content="{{ post.excerpt | strip_html | downcase }}">
+            {% if post.image %}
+            <div class="post-card-image">
+              <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+            </div>
+            {% endif %}
             <div class="post-card-content">
               <h3>
                 <a class="post-link" href="{{ post.url | relative_url }}">
                   {{ post.title | escape }}
                 </a>
               </h3>
-              <div class="post-card-excerpt">
-                {{ post.excerpt | strip_html | truncatewords: 25 }}
-              </div>
               <div class="post-card-meta">
-                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%b %-d, %Y" }}</span>
+                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%B %-d, %Y" }}</span>
                 <div class="post-card-tags">
                   {% for category in post.categories %}
                     <a href="#" class="post-tag" data-tag="{{ category | slugify }}">{{ category }}</a>
@@ -99,17 +106,19 @@ pagination:
         {%- for post in site.posts -%}
           {%- unless post.url == featured_post.url -%}
           <div class="card post-card animate-on-scroll" data-animation="animate__fadeInUp" data-tags="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}" data-title="{{ post.title | escape | downcase }}" data-content="{{ post.excerpt | strip_html | downcase }}">
+            {% if post.image %}
+            <div class="post-card-image">
+              <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+            </div>
+            {% endif %}
             <div class="post-card-content">
               <h3>
                 <a class="post-link" href="{{ post.url | relative_url }}">
                   {{ post.title | escape }}
                 </a>
               </h3>
-              <div class="post-card-excerpt">
-                {{ post.excerpt | strip_html | truncatewords: 25 }}
-              </div>
               <div class="post-card-meta">
-                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%b %-d, %Y" }}</span>
+                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%B %-d, %Y" }}</span>
                 <div class="post-card-tags">
                   {% for category in post.categories %}
                     <a href="#" class="post-tag" data-tag="{{ category | slugify }}">{{ category }}</a>

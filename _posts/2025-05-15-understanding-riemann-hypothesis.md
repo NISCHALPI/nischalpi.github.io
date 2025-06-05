@@ -4,6 +4,7 @@ title: "Understanding the Riemann Hypothesis"
 date: 2025-05-15
 categories: Number-Theory
 mathjax: true
+image: /assets/images/equations.jpg
 ---
 
 # Understanding the Riemann Hypothesis

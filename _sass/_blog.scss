@@ -121,7 +121,55 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 2rem;
   border-left: 5px solid var(--accent-color, var(--primary-color));
+  display: flex;
+  flex-direction: column;
   position: relative;
+
+  .featured-post-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: -2rem -2rem 1.5rem -2rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-dark);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.5)
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .featured-post-content {
+    position: relative;
+    z-index: 1;
+  }
   
   &:hover {
     transform: translateY(-5px);
@@ -138,6 +186,7 @@
     height: 3rem;
     clip-path: polygon(100% 0, 0 0, 100% 100%);
     opacity: 0.8;
+    z-index: 1;
   }
 }
 
@@ -185,6 +234,11 @@
   align-items: center;
   margin-top: 1rem;
   font-size: 0.875rem;
+  color: var(--text-color-soft);
+  
+  .post-meta {
+    color: inherit;
+  }
 }
 
 // Blog posts heading
@@ -206,8 +260,8 @@
 // Post grid
 .post-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 3rem;
 }
 
@@ -218,64 +272,96 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   height: 100%;
-  border-top: 4px solid var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  border-left: 4px solid var(--accent-color, var(--primary-color));
   
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   }
-}
+
+  .post-card-image {
+    width: 100%;
+    height: 180px; // Increased height for better proportion
+    overflow: hidden;
+    position: relative;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  }
 
 .post-card-content {
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
 }
 
 .post-link {
   color: var(--heading-color);
   text-decoration: none;
   transition: color 0.2s ease;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
   
   &:hover {
     color: var(--primary-color);
   }
 }
 
+.post-card-meta {
+  font-size: 0.85rem;
+  color: var(--text-color-soft);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  i {
+    font-size: 0.75rem;
+  }
+}
+
 .post-card-excerpt {
-  margin: 1rem 0;
+  font-size: 0.9rem;
   color: var(--text-color);
   flex-grow: 1;
   line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .post-card-read-more {
   margin-top: auto;
-  padding-top: 1rem;
 }
 
 .read-more-link {
   display: inline-block;
-  color: var(--primary-color);
-  font-weight: 500;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
   text-decoration: none;
-  position: relative;
+  font-weight: 500;
   transition: all 0.2s ease;
   
-  &::after {
-    content: '→';
-    display: inline-block;
-    margin-left: 0.25rem;
-    transition: transform 0.2s ease;
-  }
-  
   &:hover {
-    color: var(--primary-color-dark);
-    
-    &::after {
-      transform: translateX(3px);
-    }
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
   }
 }
 
@@ -287,14 +373,16 @@
   gap: 0.5rem;
 }
 
+/* Base tag styles that apply to both featured and regular posts */
 .post-tag {
   display: inline-block;
   background-color: var(--tag-bg, rgba(var(--primary-color-rgb), 0.15));
-  color: var(--tag-text, var(--primary-color));
+  color: var(--primary-color);
   font-size: 0.75rem;
   padding: 0.25rem 0.75rem;
   border-radius: 50px;
   text-decoration: none;
+  cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
   
   &:hover {
@@ -306,6 +394,10 @@
     background-color: var(--primary-color);
     color: #fff;
   }
+}
+
+/* Ensure featured post tags and post card tags have identical hover behavior */
+/* Hover styles now unified in .post-tag class */
 }
 
 // Tags filter
@@ -400,7 +492,6 @@
   .featured-post-card {
     padding: 1.5rem;
   }
-}
 
 @media (max-width: 576px) {
   .post-grid {
@@ -417,4 +508,5 @@
     align-items: flex-start;
     gap: 0.5rem;
   }
+}
 }

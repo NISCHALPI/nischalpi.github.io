@@ -41,10 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Filter posts based on search query
   function filterPosts(query) {
     let matchCount = 0;
-    searchResults.innerHTML = '';
     
     if (query.length === 0) {
-      searchResults.style.display = 'none';
       postCards.forEach(card => card.style.display = '');
       if (featuredPost) featuredPost.style.display = '';
       updatePostsCount();
@@ -59,17 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (title.includes(query) || content.includes(query) || tags.includes(query)) {
         card.style.display = '';
         matchCount++;
-        
-        // Add to search results dropdown (limit to 5)
-        if (matchCount <= 5) {
-          const resultItem = document.createElement('div');
-          resultItem.className = 'search-result-item';
-          resultItem.textContent = card.querySelector('.post-link').textContent;
-          resultItem.addEventListener('click', function() {
-            window.location.href = card.querySelector('.post-link').href;
-          });
-          searchResults.appendChild(resultItem);
-        }
       } else {
         card.style.display = 'none';
       }
@@ -95,12 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePostsCount();
   }
   
-  // Close search results when clicking outside
-  document.addEventListener('click', function(event) {
-    if (event.target !== searchInput && !searchResults.contains(event.target)) {
-      searchResults.style.display = 'none';
-    }
-  });
+  // No need for the click outside handler since we removed the dropdown
   
   // Filter by tag - simplified version
   function filterByTag(tag) {
