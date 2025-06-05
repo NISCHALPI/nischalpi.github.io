@@ -360,12 +360,12 @@ $spacers: (
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   
   li {
-    margin-right: 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   a {
@@ -373,7 +373,7 @@ $spacers: (
     align-items: center;
     text-decoration: none;
     color: var(--text-color);
-    transition: color 0.2s ease;
+    transition: all 0.3s ease;
     
     &:hover {
       color: var(--primary-color);
@@ -381,12 +381,23 @@ $spacers: (
       .username {
         color: var(--primary-color);
       }
+      
+      i {
+        transform: scale(1.1);
+        
+        &.fa-google-scholar, &.ai-google-scholar { color: #4285f4; }
+        &.fa-researchgate, &.ai-researchgate { color: #00ccbb; }
+        &.fa-orcid, &.ai-orcid { color: #a6ce39; }
+        &.fa-linkedin { color: #0077b5; }
+        &.fa-github { color: #333; }
+      }
     }
   }
   
   i {
     font-size: 1.25rem;
     margin-right: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
   }
   
   .username {

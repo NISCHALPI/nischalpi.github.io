@@ -1,15 +1,6 @@
 // Enhanced JavaScript file for the PhD portfolio website
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Header scroll effect
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('.site-header');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
 
   // Initialize animations for elements with animate-on-scroll class
   const animateOnScroll = () => {
@@ -80,12 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
   addAnimationClasses();
   
   // Run animation check on scroll with throttling for performance
-  let scrollTimeout;
+  let animationScrollTimeout;
   window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-      window.cancelAnimationFrame(scrollTimeout);
+    if (animationScrollTimeout) {
+      window.cancelAnimationFrame(animationScrollTimeout);
     }
-    scrollTimeout = window.requestAnimationFrame(animateOnScroll);
+    animationScrollTimeout = window.requestAnimationFrame(animateOnScroll);
   });
   
   // Run once on page load
@@ -231,32 +222,49 @@ document.addEventListener('DOMContentLoaded', function() {
   
   enhanceImages();
   
-  // Enhanced header behavior on scroll
-  const header = document.querySelector('.site-header');
-  if (header) {
+  // Enhanced header behavior on scroll with performance optimization
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
     let lastScrollTop = 0;
+    let headerScrollTimeout;
     
-    window.addEventListener('scroll', () => {
+    function updateHeaderState() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
-      // Add 'scrolled' class to style header when not at top
+      // Always ensure proper background when scrolled
       if (scrollTop > 20) {
-        header.classList.add('scrolled');
+        siteHeader.classList.add('scrolled');
+        document.body.style.setProperty('--header-bg-opacity', '0.95');
       } else {
-        header.classList.remove('scrolled');
+        siteHeader.classList.remove('scrolled');
+        document.body.style.setProperty('--header-bg-opacity', '1');
       }
       
       // Add hide/show header on scroll down/up
       if (scrollTop > lastScrollTop && scrollTop > 200) {
         // Scrolling down & not at top - hide header
-        header.classList.add('header-hidden');
+        siteHeader.classList.add('header-hidden');
       } else {
         // Scrolling up or at top - show header
-        header.classList.remove('header-hidden');
+        siteHeader.classList.remove('header-hidden');
       }
       
       lastScrollTop = scrollTop;
-    });
+    }
+    
+    // Throttled scroll handler using requestAnimationFrame
+    function handleHeaderScroll() {
+      if (headerScrollTimeout) {
+        window.cancelAnimationFrame(headerScrollTimeout);
+      }
+      headerScrollTimeout = window.requestAnimationFrame(updateHeaderState);
+    }
+    
+    // Handle initial scroll position (e.g., on page refresh)
+    updateHeaderState();
+    
+    // Add scroll event listener with performance optimization
+    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
   }
   
   // Add hover effects for elements
@@ -383,24 +391,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 300);
   }
   
-  // Initialize resource navigation
-  document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('.resources-section');
-    sections.forEach(section => {
-      const grid = section.querySelector('.resource-grid');
-      const prevBtn = section.querySelector('.prev');
-      const nextBtn = section.querySelector('.next');
+  // Initialize resources if they exist
+  const sections = document.querySelectorAll('.resources-section');
+  sections.forEach(section => {
+    const grid = section.querySelector('.resource-grid');
+    const prevBtn = section.querySelector('.prev');
+    const nextBtn = section.querySelector('.next');
+    
+    if (grid && prevBtn && nextBtn) {
+      prevBtn.disabled = true; // Initially disable prev button
+      nextBtn.disabled = grid.scrollWidth <= grid.clientWidth; // Disable next if no overflow
       
-      if (grid && prevBtn && nextBtn) {
-        prevBtn.disabled = true; // Initially disable prev button
-        nextBtn.disabled = grid.scrollWidth <= grid.clientWidth; // Disable next if no overflow
-        
-        // Update button states on resize
-        window.addEventListener('resize', () => {
-          prevBtn.disabled = grid.scrollLeft <= 0;
-          nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth;
-        });
-      }
-    });
+      // Update button states on resize
+      window.addEventListener('resize', () => {
+        prevBtn.disabled = grid.scrollLeft <= 0;
+        nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth;
+      });
+    }
   });
+  
+  // Handle header transparency and scroll state
+  if (siteHeader) {
+    // Handle initial scroll position (e.g., on page refresh)
+    updateHeaderState();
+  }
 });
