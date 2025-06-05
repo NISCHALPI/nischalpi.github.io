@@ -33,32 +33,30 @@ pagination:
   {% endif %}
   {% if featured_post %}
   <div class="featured-post animate-on-scroll" data-animation="animate__fadeIn">
-    <h2 class="featured-title">Featured Post</h2>
-    <div class="featured-post-card">
+    <div class="post-card post-card--featured" data-title="{{ featured_post.title }}" data-content="{{ featured_post.content | strip_html }}" data-tags="{{ featured_post.categories | join: ' ' }}">
       {% if featured_post.image %}
-      <div class="featured-post-image">
+      <div class="post-card-image">
         <img src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title }}">
       </div>
       {% endif %}
-      <div class="featured-post-content">
+      <div class="post-card-content">
         <h3>
-          <a class="featured-post-link" href="{{ featured_post.url | relative_url }}">
+          <a class="post-link" href="{{ featured_post.url | relative_url }}">
             {{ featured_post.title | escape }}
           </a>
         </h3>
-        <div class="featured-post-excerpt">
-          {{ featured_post.excerpt | strip_html | truncatewords: 50 }}
-        </div>
-        <div class="featured-post-meta">
+        <div class="post-card-meta">
           <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ featured_post.date | date: "%b %-d, %Y" }}</span>
-          <div class="featured-post-tags">
+          {% if featured_post.categories %}
+          <div class="post-card-tags">
             {% for category in featured_post.categories %}
-              <a href="#" class="post-tag" data-tag="{{ category | slugify }}">{{ category }}</a>
+              <a href="#" class="post-tag" data-tag="{{ category }}">{{ category }}</a>
             {% endfor %}
           </div>
+          {% endif %}
         </div>
-        <div class="featured-post-read-more">
-          <a href="{{ featured_post.url | relative_url }}" class="featured-read-more-link">Read More</a>
+        <div class="post-card-read-more">
+          <a href="{{ featured_post.url | relative_url }}" class="read-more-link">Read More</a>
         </div>
       </div>
     </div>
@@ -75,7 +73,7 @@ pagination:
       {%- if paginator.posts.size > 0 -%}
         {%- for post in paginator.posts -%}
           {%- unless post.url == featured_post.url -%}
-          <div class="card post-card animate-on-scroll" data-animation="animate__fadeInUp" data-tags="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}" data-title="{{ post.title | escape | downcase }}" data-content="{{ post.excerpt | strip_html | downcase }}">
+          <div class="post-card" data-title="{{ post.title }}" data-content="{{ post.content | strip_html }}" data-tags="{{ post.categories | join: ' ' }}">
             {% if post.image %}
             <div class="post-card-image">
               <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
@@ -88,12 +86,14 @@ pagination:
                 </a>
               </h3>
               <div class="post-card-meta">
-                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%B %-d, %Y" }}</span>
+                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%b %-d, %Y" }}</span>
+                {% if post.categories %}
                 <div class="post-card-tags">
                   {% for category in post.categories %}
-                    <a href="#" class="post-tag" data-tag="{{ category | slugify }}">{{ category }}</a>
+                    <a href="#" class="post-tag" data-tag="{{ category }}">{{ category }}</a>
                   {% endfor %}
                 </div>
+                {% endif %}
               </div>
               <div class="post-card-read-more">
                 <a href="{{ post.url | relative_url }}" class="read-more-link">Read More</a>
@@ -105,7 +105,7 @@ pagination:
       {%- else -%}
         {%- for post in site.posts -%}
           {%- unless post.url == featured_post.url -%}
-          <div class="card post-card animate-on-scroll" data-animation="animate__fadeInUp" data-tags="{% for cat in post.categories %}{{ cat | slugify }} {% endfor %}" data-title="{{ post.title | escape | downcase }}" data-content="{{ post.excerpt | strip_html | downcase }}">
+          <div class="post-card" data-title="{{ post.title }}" data-content="{{ post.content | strip_html }}" data-tags="{{ post.categories | join: ' ' }}">
             {% if post.image %}
             <div class="post-card-image">
               <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
@@ -118,12 +118,14 @@ pagination:
                 </a>
               </h3>
               <div class="post-card-meta">
-                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%B %-d, %Y" }}</span>
+                <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%b %-d, %Y" }}</span>
+                {% if post.categories %}
                 <div class="post-card-tags">
                   {% for category in post.categories %}
-                    <a href="#" class="post-tag" data-tag="{{ category | slugify }}">{{ category }}</a>
+                    <a href="#" class="post-tag" data-tag="{{ category }}">{{ category }}</a>
                   {% endfor %}
                 </div>
+                {% endif %}
               </div>
               <div class="post-card-read-more">
                 <a href="{{ post.url | relative_url }}" class="read-more-link">Read More</a>
