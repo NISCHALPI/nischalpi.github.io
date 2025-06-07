@@ -1,33 +1,247 @@
-# Mathematics PhD Portfolio
+# Nischal Bhattarai - Mathematics PhD Portfolio
 
-A comprehensive, professional portfolio website for mathematics PhD students and academics. Built with Jekyll and designed to be deployed on GitHub Pages, this template provides an elegant way to showcase your academic work, research, teaching experience, and blog about mathematical topics.
+A professional Jekyll-based portfolio website for mathematics PhD students and academics. This site showcases academic work, research, teaching experience, and provides a platform for mathematical blogging with full MathJax support.
 
-![Mathematics PhD Portfolio](assets/images/screenshot.png)
+🌟 **Live Site:** [https://nischalpi.github.io](https://nischalpi.github.io)
 
-## Features
+## 🚀 Quick Start Guide
 
-- Clean, professional design with subtle animations
-- Mobile-responsive layout
-- MathJax support for beautiful mathematical notation
-- Blog section with category filtering and search
-- Research publications with BibTeX integration
-- Teaching materials and philosophy
-- Resources and recommendations section
-- Contact information and form
-- Customizable navigation and site settings
+### Prerequisites
+- **Ruby** 3.2+ installed
+- **Git** for version control
+- **Text editor** (VS Code, Sublime, etc.)
 
-## Table of Contents
+### Local Development Setup
+```bash
+# Clone and setup
+git clone https://github.com/NISCHALPI/nischalpi.github.io.git
+cd nischalpi.github.io
 
-- [Prerequisites](#prerequisites)
-- [Local Development](#local-development)
-- [Detailed Deployment Guide](#detailed-deployment-guide)
-- [Blog Setup and Configuration](#blog-setup-and-configuration)
-- [Adding and Managing Comments](#adding-and-managing-comments)
-- [Customizing Your Site](#customizing-your-site)
-- [Content Management](#content-management)
-- [Advanced Customization](#advanced-customization)
-- [Troubleshooting](#troubleshooting)
-- [License and Credits](#license-and-credits)
+# Install dependencies
+bundle install
+
+# Serve locally
+bundle exec jekyll serve
+
+# View at: http://localhost:4000
+```
+
+## 📝 Content Management Guide
+
+### Adding New Blog Posts
+
+1. **Create a new file** in `_posts/` folder with the naming format:
+   ```
+   YYYY-MM-DD-your-post-title.md
+   ```
+
+2. **Add the front matter** at the top of your file:
+   ```yaml
+   ---
+   layout: post
+   title: "Your Amazing Math Topic"
+   date: 2025-06-07
+   categories: [Number Theory, Analysis]  # Choose relevant categories
+   tags: [riemann-hypothesis, prime-numbers, analysis]
+   mathjax: true  # Enable math rendering
+   description: "A brief description of your post for SEO"
+   ---
+   ```
+
+3. **Write your content** using Markdown with MathJax:
+   ```markdown
+   # Introduction
+
+   When discussing the Riemann Hypothesis, we often start with the zeta function:
+
+   $$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}$$
+
+   For inline math, use single dollar signs like $\pi \approx 3.14159$.
+
+   ## Your Section
+
+   Continue writing your mathematical content...
+   ```
+
+4. **Save and test** locally with `bundle exec jekyll serve`
+
+### Example Blog Post Structure
+```markdown
+---
+layout: post
+title: "Understanding the Riemann Hypothesis"
+date: 2025-06-07
+categories: [Number Theory]
+tags: [riemann-hypothesis, zeta-function, prime-numbers]
+mathjax: true
+description: "An exploration of one of mathematics' greatest unsolved problems"
+---
+
+# The Riemann Hypothesis: A Mathematical Mystery
+
+The Riemann Hypothesis stands as one of the most famous unsolved problems in mathematics...
+
+## The Riemann Zeta Function
+
+The journey begins with Euler's zeta function:
+
+$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}$$
+
+## Critical Line and Non-Trivial Zeros
+
+The hypothesis states that all non-trivial zeros of $\zeta(s)$ lie on the critical line $\Re(s) = \frac{1}{2}$...
+```
+
+## 🎨 Customizing Your Site
+
+### Basic Site Information
+Edit `_config.yml` to update:
+```yaml
+title: "Your Name | Mathematics PhD"
+description: "Your specialization description"
+author: "Your Full Name"
+email: "your.email@university.edu"
+url: "https://yourusername.github.io"
+```
+
+### Navigation Menu
+Update the navigation in `_config.yml`:
+```yaml
+header_pages:
+  - index.md          # Home page
+  - research.md       # Research & Publications
+  - blog.md          # Blog posts
+  - teaching.md      # Teaching experience
+  - resources.md     # Useful resources
+  - contact.md       # Contact information
+```
+
+### Adding Your Information
+
+1. **Update the homepage** (`index.md`):
+   - Replace the bio section with your information
+   - Update research interests
+   - Add your photo to `/assets/images/profile.jpg`
+
+2. **Research page** (`research.md`):
+   - Add your publications
+   - Include current research projects
+   - Link to papers and preprints
+
+3. **Teaching page** (`teaching.md`):
+   - List courses you've taught
+   - Include teaching philosophy
+   - Add links to course materials
+
+### Managing Publications
+Add your publications to `_bibliography/references.bib`:
+```bibtex
+@article{your2024paper,
+  title={Your Amazing Mathematical Result},
+  author={Bhattarai, Nischal and Collaborator, Jane},
+  journal={Journal of Pure Mathematics},
+  volume={42},
+  number={3},
+  pages={123--456},
+  year={2024},
+  publisher={Mathematical Society}
+}
+```
+
+## 🎯 Advanced Features
+
+### Categories and Tags
+- **Categories**: Broad topics like "Number Theory", "Analysis", "Topology"
+- **Tags**: Specific topics like "riemann-hypothesis", "measure-theory", "algebraic-topology"
+
+### Math Rendering
+Use MathJax for beautiful mathematical expressions:
+
+- **Inline math**: `$E = mc^2$` → $E = mc^2$
+- **Display math**: 
+  ```latex
+  $$\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$$
+  ```
+- **Aligned equations**:
+  ```latex
+  $$\begin{align}
+  f(x) &= ax^2 + bx + c \\
+  f'(x) &= 2ax + b
+  \end{align}$$
+  ```
+
+### Adding Images
+1. Place images in `/assets/images/`
+2. Reference in posts:
+   ```markdown
+   ![Description]({{ site.baseurl }}/assets/images/your-image.jpg)
+   ```
+
+### Code Highlighting
+```python
+# Python code example
+import numpy as np
+import matplotlib.pyplot as plt
+
+def riemann_zeta_approximation(s, terms=1000):
+    return sum(1/n**s for n in range(1, terms+1))
+```
+
+## 🚀 Deployment & Updates
+
+### Making Changes Live
+1. **Make your changes** locally
+2. **Test locally**: `bundle exec jekyll serve`
+3. **Commit changes**:
+   ```bash
+   git add .
+   git commit -m "Add new blog post about topology"
+   git push origin main
+   ```
+4. **GitHub Actions** will automatically deploy your changes (takes 2-5 minutes)
+
+### Updating Dependencies
+```bash
+# Update gems
+bundle update
+
+# If you encounter Ruby version issues
+bundle install
+```
+
+## 📋 Content Checklist
+
+### For New Blog Posts:
+- [ ] Proper filename format (`YYYY-MM-DD-title.md`)
+- [ ] Complete front matter with title, date, categories, tags
+- [ ] MathJax enabled if using math (`mathjax: true`)
+- [ ] Clear, descriptive title and description
+- [ ] Proofread for mathematical notation and content
+- [ ] Test locally before pushing
+
+### For Site Updates:
+- [ ] Update `_config.yml` with your information
+- [ ] Replace placeholder content with your details
+- [ ] Add your profile photo
+- [ ] Update research and teaching pages
+- [ ] Test all navigation links
+- [ ] Verify contact information
+
+## 🛠️ Troubleshooting
+
+### Common Issues:
+
+1. **Math not rendering**: Ensure `mathjax: true` in front matter
+2. **Site not updating**: Check GitHub Actions tab for build errors
+3. **Local server issues**: Run `bundle install` and try again
+4. **Ruby version errors**: Update to Ruby 3.2+ or match `.github/workflows/jekyll.yml`
+
+### Getting Help:
+- Check [Jekyll Documentation](https://jekyllrb.com/docs/)
+- View [GitHub Pages Docs](https://docs.github.com/en/pages)
+- Issues? Create a GitHub issue in your repository
+
+## 📚 Quick Reference
 
 ## Prerequisites
 
@@ -524,3 +738,116 @@ This project is open source and available under the [MIT License](LICENSE).
 - Icons from [Font Awesome](https://fontawesome.com/)
 - Mathematical typesetting by [MathJax](https://www.mathjax.org/)
 - Blog search functionality by [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+
+---
+
+### File Structure Quick Reference
+```
+├── _config.yml           # Main site configuration
+├── index.md              # Homepage content
+├── blog.md               # Blog page
+├── research.md           # Research page
+├── teaching.md           # Teaching page
+├── resources.md          # Resources page
+├── contact.md            # Contact page
+├── _posts/               # Blog posts (YYYY-MM-DD-title.md)
+├── _layouts/             # HTML templates
+├── _includes/            # Reusable HTML components
+├── _sass/                # SCSS/CSS styling
+├── assets/
+│   ├── images/           # Images and photos
+│   ├── js/               # JavaScript files
+│   ├── css/              # Additional CSS
+│   └── pdfs/             # PDF documents
+├── _bibliography/        # BibTeX files
+└── .github/workflows/    # GitHub Actions for deployment
+```
+
+### Common Commands
+```bash
+# Development
+bundle exec jekyll serve          # Serve locally
+bundle exec jekyll build          # Build site
+bundle exec jekyll clean          # Clean build files
+
+# Git workflow
+git add .                         # Stage changes
+git commit -m "Your message"      # Commit changes
+git push origin main              # Deploy to GitHub
+
+# Maintenance
+bundle update                     # Update gems
+bundle install                    # Install dependencies
+```
+
+### Math Examples for Posts
+
+**Inline Math:**
+```markdown
+The famous equation $E = mc^2$ shows the relationship between energy and mass.
+```
+
+**Display Math:**
+```markdown
+$$\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$$
+```
+
+**Theorem Environment:**
+```markdown
+**Theorem (Fundamental Theorem of Calculus):** Let $f$ be continuous on $[a,b]$. Then:
+
+$$\frac{d}{dx}\left(\int_{a}^{x}f(t)dt\right)=f(x)$$
+```
+
+## 🎓 Academic Features
+
+### Research Integration
+- **arXiv links**: Add preprint links to your research page
+- **Google Scholar**: Link to your citation profile
+- **ORCID**: Include your researcher ID
+- **ResearchGate**: Connect your academic profile
+
+### Teaching Resources
+- Upload lecture notes as PDFs to `/assets/pdfs/`
+- Create problem sets with solutions
+- Link to course websites
+- Include teaching evaluations (optional)
+
+### Conference Presentations
+Add a presentations section to showcase:
+- Conference talks
+- Seminar presentations  
+- Workshop participation
+- Invited lectures
+
+## 🔧 Technical Details
+
+### Supported Features
+- ✅ MathJax 3.x for mathematics
+- ✅ Responsive design (mobile-friendly)
+- ✅ Dark/light mode toggle
+- ✅ Search functionality
+- ✅ Category and tag filtering
+- ✅ RSS feed generation
+- ✅ SEO optimization
+- ✅ Analytics integration
+- ✅ Comment systems
+- ✅ Social media integration
+
+### Browser Support
+- Chrome/Chromium 80+
+- Firefox 75+
+- Safari 13+
+- Edge 80+
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Created by:** [Nischal Bhattarai](https://github.com/NISCHALPI)  
+**Last Updated:** June 2025  
+**Version:** 1.0
+
+For questions or issues, please [create an issue](https://github.com/NISCHALPI/nischalpi.github.io/issues) on GitHub.
