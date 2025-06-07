@@ -4,32 +4,67 @@
 /* Header and Navigation Styles */
 .site-header {
   @include fixed-header;
-  background-color: transparent;
-  transition: var(--transition-standard);
+  background-color: rgba(var(--surface-color-rgb), 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid transparent;
   padding: 1rem 0;
+  z-index: 1000;
   
   .wrapper {
     @include flex-between;
+    position: relative;
   }
   
   .site-title {
     color: var(--heading-color);
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-weight: 800;
+    font-size: 1.75rem;
     text-decoration: none;
     display: flex;
     align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    
+    .logo {
+      font-size: 2rem;
+      color: var(--primary-color);
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover {
+      .logo {
+        transform: rotate(180deg) scale(1.1);
+      }
+    }
+    
+    .site-brand {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
+    }
   }
 }
 
 .site-header.scrolled {
-  background-color: var(--surface-color);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: var(--box-shadow);
+  background-color: rgba(var(--surface-color-rgb), 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid var(--border-color);
   padding: 0.75rem 0;
+  
+  .site-title {
+    font-size: 1.5rem;
+    
+    .logo {
+      font-size: 1.75rem;
+    }
+  }
 }
 
 .site-nav {
@@ -43,65 +78,268 @@
   .menu-icon {
     display: none;
     font-size: 1.5rem;
-    padding: 0.5rem;
+    padding: 0.75rem;
     color: var(--text-color);
     cursor: pointer;
     margin-left: auto;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: 1px solid transparent;
+    
+    &:hover {
+      background-color: var(--hover-background);
+      border-color: var(--border-color);
+      transform: scale(1.05);
+    }
     
     @media (max-width: $breakpoint-md) {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
   
   .trigger {
     display: flex;
     align-items: center;
+    gap: 0.25rem;
     
     @media (max-width: $breakpoint-md) {
       display: none;
       position: absolute;
-      top: 100%;
+      top: calc(100% + 1rem);
       right: 0;
       left: 0;
-      background-color: var(--surface-color);
-      box-shadow: var(--box-shadow);
+      background-color: rgba(var(--surface-color-rgb), 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
       flex-direction: column;
-      align-items: flex-start;
-      padding: 1rem;
-      border-bottom-left-radius: var(--border-radius);
-      border-bottom-right-radius: var(--border-radius);
+      align-items: stretch;
+      padding: 1.5rem;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--border-color);
+      margin: 0 1rem;
       
       .page-link {
-        margin: 0.75rem 0;
+        margin: 0;
+        padding: 1rem 1.5rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        font-weight: 600;
         
-        &:last-child {
-          margin-bottom: 0;
+        &:not(:last-child) {
+          margin-bottom: 0.5rem;
         }
+      }
+      
+      .theme-toggle {
+        margin: 1rem auto 0;
+        align-self: center;
       }
     }
   }
   
   &.nav-open .trigger {
     display: flex;
+    animation: slideDown 0.3s ease-out;
   }
   
   .page-link {
     color: var(--text-color);
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: var(--border-radius);
-    transition: var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
-    @include link-centered-underline-animation;
+    position: relative;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
     
     &:not(:last-child) {
-      margin-right: 0.5rem;
+      margin-right: 0.25rem;
+    }
+    
+    // Modern underline effect
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0.25rem;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      border-radius: 1px;
     }
     
     &:hover {
-      background-color: var(--hover-background);
       color: var(--primary-color);
+      background-color: var(--hover-background);
+      transform: translateY(-1px);
+      
+      &::before {
+        width: calc(100% - 1.5rem);
+      }
     }
+    
+    // Active state for current page
+    &.active,
+    &[aria-current="page"] {
+      color: var(--primary-color);
+      font-weight: 600;
+      
+      &::before {
+        width: calc(100% - 1.5rem);
+      }
+    }
+  }
+}
+
+// Additional responsive improvements for navigation
+@media (max-width: $breakpoint-sm) {
+  .site-header {
+    padding: 0.75rem 0;
+    
+    .wrapper {
+      padding: 0 1rem;
+    }
+    
+    .site-title {
+      font-size: 1.5rem;
+      
+      .logo {
+        font-size: 1.75rem;
+      }
+      
+      .site-brand {
+        display: none; // Hide brand text on very small screens
+      }
+    }
+  }
+  
+  .site-nav {
+    .trigger {
+      margin: 0 0.5rem;
+      padding: 1rem;
+      
+      .page-link {
+        padding: 0.875rem 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Smooth scroll behavior for navigation links
+html {
+  scroll-behavior: smooth;
+}
+
+// Focus styles for accessibility
+.page-link:focus,
+.theme-toggle:focus,
+.menu-icon:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+// Active page indication (for Jekyll sites)
+.page-link[aria-current="page"],
+.page-link.current {
+  color: var(--primary-color);
+  font-weight: 600;
+  
+  &::before {
+    width: calc(100% - 1.5rem);
+  }
+}
+
+// Loading state for navigation
+.site-header.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+// Backdrop blur support check
+@supports not (backdrop-filter: blur(20px)) {
+  .site-header {
+    background-color: var(--surface-color) !important;
+  }
+  
+  .site-nav .trigger {
+    @media (max-width: $breakpoint-md) {
+      background-color: var(--surface-color) !important;
+    }
+  }
+}
+
+// Theme toggle button - improved styling
+.theme-toggle {
+  background: rgba(var(--primary-color-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.3);
+    
+    &::before {
+      opacity: 1;
+    }
+    
+    i {
+      color: white;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+  
+  i {
+    transition: all 0.3s ease;
+  }
+}
+
+// Mobile menu animation
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -138,7 +376,7 @@
   }
   
   .hero-content {
-    max-width: 800px;
+    width: 100%;
     
     h1 {
       font-size: 3.5rem;

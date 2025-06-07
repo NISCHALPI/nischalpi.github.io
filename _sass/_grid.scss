@@ -14,19 +14,7 @@ $grid-breakpoints: (
   width: 100%;
   padding-right: $grid-gutter-width;
   padding-left: $grid-gutter-width;
-  margin-right: auto;
-  margin-left: auto;
-
-  @for $i from 1 through length($grid-breakpoints) {
-    $breakpoint: nth(map-keys($grid-breakpoints), $i);
-    $width: map-get($grid-breakpoints, $breakpoint);
-
-    @if $breakpoint != xs {
-      @media (min-width: $width) {
-        max-width: $width;
-      }
-    }
-  }
+  margin: 0;
 }
 
 .row {
@@ -42,17 +30,5 @@ $grid-breakpoints: (
   width: 100%;
   padding-right: $grid-gutter-width;
   padding-left: $grid-gutter-width;
-
-  @for $i from 1 through length($grid-breakpoints) {
-    $breakpoint: nth(map-keys($grid-breakpoints), $i);
-    $width: map-get($grid-breakpoints, $breakpoint);
-
-    @if $breakpoint != xs {
-      @media (min-width: $width) {
-        flex: 0 0 auto;
-        width: ($width / 1200px) * 100%;
-        max-width: ($width / 1200px) * 100%;
-      }
-    }
-  }
+  flex: 1;
 }

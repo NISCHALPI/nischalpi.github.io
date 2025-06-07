@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}" class="theme-transition">
   {%- include head.html -%}
-  <body class="theme-transition">
+  <body class="theme-transition{% if page.title == 'Home' %} home{% endif %}">
     <!-- Progress bar for scrolling -->
     <div class="scroll-indicator-container">
       <div class="scroll-indicator"></div>

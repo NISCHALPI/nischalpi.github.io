@@ -10,6 +10,7 @@
   // Light theme defaults (from $light-theme map)
   --background-color: #{map-get($light-theme, 'background-color')};
   --surface-color: #{map-get($light-theme, 'surface-color')};
+  --surface-color-rgb: 255, 255, 255; // RGB values for surface color
   --text-color: #{map-get($light-theme, 'text-color')};
   --text-color-soft: #{map-get($light-theme, 'text-color-soft')};
   --heading-color: #{map-get($light-theme, 'heading-color')};
@@ -42,6 +43,7 @@
   --font-family-sans-serif: #{$font-stack-sans};
   --font-family-mono: #{$font-stack-mono};
   --font-family-serif: #{$font-stack-serif};
+  --font-heading: #{$font-stack-sans};
   --border-radius-sm: #{$border-radius-sm};
   --border-radius: #{$border-radius};
   --border-radius-lg: #{$border-radius-lg};
@@ -61,6 +63,7 @@
   // Override light theme variables with dark theme values
   --background-color: #{map-get($dark-theme, 'background-color')} !important;
   --surface-color: #{map-get($dark-theme, 'surface-color')} !important;
+  --surface-color-rgb: 31, 41, 55 !important; // RGB values for dark surface color
   --text-color: #{map-get($dark-theme, 'text-color')} !important;
   --text-color-soft: #{map-get($dark-theme, 'text-color-soft')} !important;
   --heading-color: #{map-get($dark-theme, 'heading-color')} !important;

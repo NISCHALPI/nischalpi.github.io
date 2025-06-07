@@ -105,13 +105,42 @@ document.addEventListener('DOMContentLoaded', function() {
   // Run once on page load
   animateOnScroll();
   
-  // Mobile navigation toggle
+  // Mobile navigation toggle - Enhanced
   const menuIcon = document.querySelector('.menu-icon');
   const siteNav = document.querySelector('.site-nav');
+  const navTrigger = document.querySelector('.nav-trigger');
+  const body = document.body;
   
-  if (menuIcon) {
-    menuIcon.addEventListener('click', function() {
+  if (menuIcon && siteNav) {
+    menuIcon.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
       siteNav.classList.toggle('nav-open');
+      
+      // Toggle hamburger icon animation
+      const icon = menuIcon.querySelector('i');
+      if (siteNav.classList.contains('nav-open')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+        body.style.overflow = 'hidden'; // Prevent body scroll when menu is open
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        body.style.overflow = '';
+      }
+    });
+    
+    // Close mobile menu when clicking on nav links
+    const navLinks = document.querySelectorAll('.page-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('nav-open');
+        const icon = menuIcon.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        body.style.overflow = '';
+      });
     });
   }
   
@@ -290,6 +319,32 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', handleHeaderScroll, { passive: true });
   }
   
+  // Header scroll effects
+  const header = document.querySelector('.site-header');
+  let lastScrollTop = 0;
+  
+  const handleHeaderScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Add scrolled class when scrolling down
+    if (scrollTop > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    
+    lastScrollTop = scrollTop;
+  };
+
+  // Throttled scroll listener for header
+  let headerScrollTimeout;
+  window.addEventListener('scroll', () => {
+    if (headerScrollTimeout) {
+      window.cancelAnimationFrame(headerScrollTimeout);
+    }
+    headerScrollTimeout = window.requestAnimationFrame(handleHeaderScroll);
+  });
+
   // Add hover effects for elements
   const addHoverEffects = () => {
     // Add ripple effect to buttons

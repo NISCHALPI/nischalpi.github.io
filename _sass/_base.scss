@@ -105,8 +105,8 @@ a {
 
 /* Layout */
 .wrapper {
-  max-width: 1140px; /* Common container width */
-  margin: 0 auto;
+  width: 100%; /* Full width container */
+  margin: 0;
   padding: 0 1.5rem; /* More padding for smaller screens */
 }
 
@@ -279,31 +279,60 @@ a {
   display: none; /* Will be handled by main.scss for responsiveness */
 }
 
-/* Theme toggle button */
+/* Theme toggle button - Override with modern styling */
 .theme-toggle {
-  background: transparent; /* Fully transparent */
-  border: 1px solid var(--border-color); /* Subtle border */
-  color: var(--text-color);
+  background: rgba(var(--primary-color-rgb), 0.1) !important;
+  border: 1px solid rgba(var(--primary-color-rgb), 0.2) !important;
+  color: var(--primary-color) !important;
   cursor: pointer;
-  font-size: 1.25rem; /* Slightly larger */
-  margin-left: 1.75rem;
-  padding: 0.5rem; /* More padding */
-  border-radius: 50%; /* Circular button */
-  width: 40px; /* Fixed width */
-  height: 40px; /* Fixed height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px) rotate(10deg); /* More playful hover */
-  background-color: var(--code-background); /* Subtle background on hover */
-  border-color: var(--link-color);
-}
-.theme-toggle:active {
-  transform: translateY(0px) rotate(0deg);
+  font-size: 1.1rem !important;
+  margin-left: 1rem !important;
+  padding: 0.5rem !important;
+  border-radius: 50% !important;
+  width: 42px !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.3) !important;
+    background-color: transparent !important;
+    border-color: rgba(var(--primary-color-rgb), 0.4) !important;
+    
+    &::before {
+      opacity: 1;
+    }
+    
+    i {
+      color: white !important;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0) scale(1) !important;
+  }
+  
+  i {
+    transition: all 0.3s ease;
+  }
 }
 
 /* Theme toggle icon handling moved to _theme.scss */

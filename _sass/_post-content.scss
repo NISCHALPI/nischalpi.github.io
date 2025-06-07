@@ -1,7 +1,6 @@
 // Post content specific styles
 .post-content {
-  max-width: 900px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem 2rem;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -173,8 +172,8 @@
 // Post header styles are now defined within .post class
 
 .post {
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 2rem;
   overflow: hidden;
   
@@ -223,8 +222,8 @@
   }
 
   .post-navigation {
-    max-width: 900px;
-    margin: 4rem auto 2rem;
+    width: 100%;
+    margin: 4rem 0 2rem;
     padding: 2rem 2rem;
     border-top: 1px solid var(--border-color);
 
@@ -292,8 +291,8 @@
   }
 
   .comments {
-    max-width: 900px;
-    margin: 3rem auto;
+    width: 100%;
+    margin: 3rem 0;
     padding: 0 2rem;
 
     h2 {

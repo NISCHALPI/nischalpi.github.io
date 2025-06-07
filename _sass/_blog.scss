@@ -3,8 +3,8 @@
 // Blog container with refined layout
 .blog-container {
   @extend %section-container;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 0;
   
   // Enhanced section spacing
@@ -63,8 +63,8 @@
 }
 
 .page-header-content {
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   position: relative;
   z-index: 1;
   background: transparent; /* Ensure no background interference */
@@ -107,9 +107,9 @@
   color: var(--text-color-soft);
   line-height: 1.7;
   margin-bottom: 3rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 // Enhanced blog statistics
@@ -190,8 +190,8 @@
 }
 
 .search-container {
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   text-align: center;
 }
 
@@ -219,7 +219,7 @@
 .search-input-wrapper {
   position: relative;
   margin-bottom: 3rem;
-  max-width: 700px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -514,7 +514,7 @@
 
 // New Controls Bar Styling
 .blog-controls-bar {
-  max-width: 1200px; // Or your main content width
+  width: 100%;
   margin: 0 auto 4rem auto; // Increased bottom margin for better spacing
   padding: 0 2rem; // Match section padding if needed
   position: relative;
@@ -1016,8 +1016,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 0 2rem;
   
   // Add smooth transition for dropdown spacing

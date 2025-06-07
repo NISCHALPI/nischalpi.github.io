@@ -1,9 +1,8 @@
 /* Layout styles (wrapper, page-content, section, etc.) from main.scss and enhanced-styles.scss are consolidated here. */
 
 .wrapper {
-  max-width: 1200px;
   padding: 0 1.5rem;
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
 }
 
@@ -46,8 +45,30 @@
   p.section-intro {
     font-size: 1.2rem;
     color: var(--text-color-soft);
-    max-width: 800px;
+    width: 100%;
     margin-bottom: 3rem;
+  }
+}
+
+// Special wrapper styling for home page
+.page-content .wrapper {
+  // Default wrapper styles
+  padding: 0 1.5rem;
+  margin: 0;
+  width: 100%;
+}
+
+// Home page specific wrapper - less padding for better full-width display
+.hero-section .wrapper,
+body.home .page-content .wrapper {
+  padding: 0 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+  
+  @media (min-width: 1200px) {
+    padding: 0 3rem;
   }
 }
 
@@ -56,32 +77,31 @@
   width: 100%;
   padding-right: 1rem;
   padding-left: 1rem;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0;
 }
 
 // Media query breakpoints
 @media (min-width: 576px) {
   .container {
-    max-width: 540px;
+    width: 100%;
   }
 }
 
 @media (min-width: 768px) {
   .container {
-    max-width: 720px;
+    width: 100%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    width: 100%;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    width: 100%;
   }
 }
 
