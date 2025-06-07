@@ -1,14 +1,14 @@
 # Site configuration for mathematics PhD portfolio
 url: "https://nischalpi.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/GithubPagesIter1" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog (empty for main user site)
 title: "Nischal Bhattarai | Mathematics PhD"
 description: "Mathematics PhD Student - Specializing in Analysis and Probability"
 author: "Nischal Bhattarai"
 email: "nbhattarai@tamu.edu"
 logo: "/assets/images/profile.jpg"
-repository: "NISCHALPI/GithubPagesIter1"
+repository: "NISCHALPI/nischalpi.github.io"
 github:
-  repository_nwo: "NISCHALPI/GithubPagesIter1"
+  repository_nwo: "NISCHALPI/nischalpi.github.io"
 
 # Build settings
 markdown: kramdown
