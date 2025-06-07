@@ -95,6 +95,7 @@
   padding: 1rem 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  touch-action: pan-x pan-y; // Allow both horizontal and vertical scrolling on desktop
   
   &::-webkit-scrollbar {
     display: none;
@@ -182,6 +183,15 @@
 @media (max-width: 768px) {
   .resource-grid {
     grid-auto-columns: calc(100% - 1rem);
+    overflow-x: visible; // Disable horizontal scrolling on mobile
+    grid-auto-flow: row; // Stack cards vertically instead of horizontally
+    scroll-snap-type: none; // Remove snap scrolling on mobile
+    touch-action: pan-y; // Only allow vertical scrolling on touch devices
+  }
+  
+  .resource-card, .book-card {
+    touch-action: pan-y; // Ensure cards only allow vertical scrolling
+    scroll-snap-align: none; // Remove snap alignment on mobile
   }
   
   .resources-section {

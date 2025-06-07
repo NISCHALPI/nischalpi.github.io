@@ -1,11 +1,26 @@
 // Resource section navigation
 document.addEventListener('DOMContentLoaded', () => {
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
   function updateNavButtons(section) {
     const grid = section.querySelector('.resource-grid');
     const prevBtn = section.querySelector('.prev');
     const nextBtn = section.querySelector('.next');
     
     if (grid && prevBtn && nextBtn) {
+      // Hide buttons on mobile
+      if (isMobile()) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        return;
+      }
+      
+      // Show buttons on desktop
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+      
       // Update button states
       prevBtn.disabled = grid.scrollLeft <= 0;
       nextBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1; // -1 for rounding errors
@@ -17,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function scrollSection(button, direction) {
+    // Don't scroll on mobile
+    if (isMobile()) return;
+    
     const section = button.closest('.resources-section');
     const grid = section.querySelector('.resource-grid');
     const cards = Array.from(grid.children);
@@ -52,24 +70,28 @@ document.addEventListener('DOMContentLoaded', () => {
       // Initial button state
       updateNavButtons(section);
       
-      // Update on scroll
-      grid.addEventListener('scroll', () => {
-        updateNavButtons(section);
-      });
+      // Update on scroll (only on desktop)
+      if (!isMobile()) {
+        grid.addEventListener('scroll', () => {
+          updateNavButtons(section);
+        });
+      }
       
       // Update on resize
       window.addEventListener('resize', () => {
         updateNavButtons(section);
       });
       
-      // Add touch scroll handling
-      let isScrolling;
-      grid.addEventListener('scroll', () => {
-        window.clearTimeout(isScrolling);
-        isScrolling = setTimeout(() => {
-          updateNavButtons(section);
-        }, 66); // Throttle scroll events
-      });
+      // Add touch scroll handling (only on desktop)
+      if (!isMobile()) {
+        let isScrolling;
+        grid.addEventListener('scroll', () => {
+          window.clearTimeout(isScrolling);
+          isScrolling = setTimeout(() => {
+            updateNavButtons(section);
+          }, 66); // Throttle scroll events
+        });
+      }
     }
   });
   
