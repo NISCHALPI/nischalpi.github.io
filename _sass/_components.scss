@@ -1,3 +1,6 @@
+@import "variables"; // Ensure variables are available
+@import "mixins";    // Ensure mixins are available
+
 /* Header and Navigation Styles */
 .site-header {
   @include fixed-header;
@@ -177,84 +180,136 @@
 
 /* Card Component */
 .card {
-  @extend %card-with-hover;
-  
-  .card-img-wrapper {
-    @include card-image-wrapper;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-md;
+  box-shadow: $box-shadow-sm;
+  transition: transform $transition-medium, box-shadow $transition-medium;
+  overflow: hidden; // Ensures content respects border-radius
+
+  &:hover {
+    transform: translateY(-$spacing-xxs);
+    box-shadow: $box-shadow-md;
   }
-  
+
+  .card-image {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
   .card-content {
-    @extend %card-content;
+    padding: $spacing-lg;
   }
-  
+
   .card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    
-    a {
-      color: var(--heading-color);
-      text-decoration: none;
-      
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
+    color: var(--heading-color);
   }
-  
-  .card-excerpt {
-    color: var(--text-color-soft);
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
+
+  .card-text {
+    margin-bottom: $spacing-md;
+    color: var(--text-color-secondary, var(--text-color)); // Use a secondary text color if available
   }
-  
-  .card-meta {
-    @extend %flex-center;
-    justify-content: flex-start;
-    color: var(--text-color-soft);
-    font-size: 0.85rem;
-    
-    i {
-      margin-right: 0.35rem;
-    }
-    
-    span + span {
-      margin-left: 1rem;
-    }
+
+  .card-footer {
+    padding: $spacing-md $spacing-lg;
+    background-color: var(--surface-accent-color, var(--surface-color)); // Slightly different bg for footer
+    border-top: 1px solid var(--border-color);
   }
 }
 
 /* Button Component */
 .btn {
-  @include btn-base;
-  
-  &.btn-primary {
-    @include btn-primary;
+  display: inline-block;
+  font-family: var(--font-family-sans);
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: $spacing-sm $spacing-lg;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: $border-radius-md;
+  transition: all $transition-short; // Use 'all' for comprehensive transition or specify properties
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25); // Focus ring
   }
-  
-  &.btn-secondary {
-    @include btn-base;
-    background-color: var(--secondary-color);
-    color: white;
-    
-    &:hover {
-      background-color: darken($secondary-color, 10%);
-      transform: translateY(-2px);
-    }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
   }
-  
-  &.btn-outline {
-    @include btn-outline;
+}
+
+.btn-primary {
+  color: #fff; // Assuming primary button text is white
+  background-color: var(--primary-color, $primary-color);
+  border-color: var(--primary-color, $primary-color);
+
+  &:hover {
+    background-color: var(--primary-color-dark, darken($primary-color, 10%));
+    border-color: var(--primary-color-dark, darken($primary-color, 12%));
+    transform: translateY(-2px);
+    box-shadow: $box-shadow-sm;
   }
-  
-  &.btn-lg {
-    padding: 0.75rem 1.75rem;
-    font-size: 1.1rem;
+}
+
+.btn-secondary {
+  color: var(--primary-color, $primary-color);
+  background-color: transparent;
+  border-color: var(--primary-color, $primary-color);
+
+  &:hover {
+    color: #fff;
+    background-color: var(--primary-color, $primary-color);
+    border-color: var(--primary-color, $primary-color);
   }
-  
-  &.btn-sm {
-    @include btn-small;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color, $primary-color);
+  border-color: var(--primary-color, $primary-color);
+  background-color: transparent;
+
+  &:hover {
+    color: var(--button-outline-hover-text-color, #fff);
+    background-color: var(--primary-color, $primary-color);
+    border-color: var(--primary-color, $primary-color);
   }
+}
+
+.btn-outline-secondary {
+  color: var(--secondary-color, $secondary-color);
+  border-color: var(--secondary-color, $secondary-color);
+  background-color: transparent;
+
+  &:hover {
+    color: var(--button-outline-hover-text-color, #fff);
+    background-color: var(--secondary-color, $secondary-color);
+    border-color: var(--secondary-color, $secondary-color);
+  }
+}
+
+
+.btn-lg {
+  padding: $spacing-md $spacing-xl;
+  font-size: 1.125rem;
+}
+
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: 0.875rem;
 }
 
 /* Badge Component */
@@ -378,3 +433,5 @@
     }
   }
 }
+
+/* Legacy infinity logo styles - use .logo class instead */

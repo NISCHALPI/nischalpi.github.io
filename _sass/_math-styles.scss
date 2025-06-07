@@ -104,6 +104,16 @@
     text-align: right;
     margin-top: 0.5rem;
   }
+  
+  // Add a QED symbol at the end of proofs
+  .qed {
+    float: right;
+    font-weight: bold;
+    color: var(--text-color-soft);
+    &::after {
+      content: "\25A0"; // Black square
+    }
+  }
 }
 
 // Matrix styling
@@ -182,5 +192,137 @@
   
   .MathJax {
     font-size: 100% !important;
+  }
+}
+
+// Question Environment
+.question {
+  background-color: var(--code-background); // Or a new specific variable
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color); // Softer border
+  position: relative;
+  
+  &::before {
+    content: 'Question';
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color); // Or a new specific color
+    font-size: 1.1em;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Answer Environment
+.answer {
+  background-color: var(--hover-background); // Slightly different from question
+  padding: 1.5rem;
+  margin: 1rem 0 2rem 2rem; // Indent slightly, provide top margin
+  border-radius: var(--border-radius);
+  border: 1px dashed var(--border-color-alt); // Dashed to differentiate
+  position: relative;
+  
+  &::before {
+    content: 'Answer';
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--secondary-color); // Or a new specific color
+    font-size: 1.1em;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.answer-toggle {
+  cursor: pointer;
+  color: var(--accent-color);
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+
+  &:hover {
+    color: var(--accent-color-dark);
+  }
+}
+
+// Exercise Environment
+.exercise {
+  background-color: var(--background-alt); // Yet another background
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--accent-color); // Accent border
+  position: relative;
+  
+  &::before {
+    content: 'Exercise';
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--accent-color);
+    font-size: 1.1em;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Solution Environment (for exercises)
+.solution {
+  background-color: var(--code-block-background); // Darker or distinct
+  color: var(--code-block-text-color);
+  padding: 1.5rem;
+  margin: 1rem 0 2rem 2rem; // Indent
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  position: relative;
+  // display: none; // Initially hidden, to be toggled by JS
+
+  &::before {
+    content: 'Solution';
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--text-color-soft); // Softer color for solution title
+    font-size: 1.1em;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// General Math Content Block
+.math-content-block {
+  background-color: var(--content-background); // Use a subtle background
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color-soft);
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+// Ensure MathJax/KaTeX formulas within these blocks are styled correctly
+.question, .answer, .exercise, .solution, .math-content-block {
+  .MathJax_Display, .katex-display {
+    margin: 1em 0;
+  }
+  mjx-container[jax="CHTML"][display="true"] {
+    margin: 1em 0 !important;
   }
 }

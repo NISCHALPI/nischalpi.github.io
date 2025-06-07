@@ -1,10 +1,10 @@
 # Site configuration for mathematics PhD portfolio
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "/math-portfolio" # the subpath of your site, e.g. /blog
-title: "Dr. Math Scholar" # the name of your site, e.g. ACME Corp.
-description: "Mathematics PhD Portfolio - Specializing in [Your Math Field]"
-author: "Dr. Math Scholar"
-email: "your.email@example.com"
+title: "-|" # the name of your site, e.g. ACME Corp.
+description: "Mathematics PhD Student - Specializing in Analysis and Probability" # a short description of your site
+author: "Mr. Nischal Bhattarai" # your name, e.g. John Doe
+email: "nbhattarai@tamu.edu"
 logo: "/assets/images/profile.jpg" # for minimal theme
 repository: "username/math-portfolio" # IMPORTANT: Replace this with your actual GitHub username/repo-name
 github:
@@ -46,7 +46,7 @@ header_pages:
 # Social media
 social:
   - platform: github
-    user_url: https://github.com/username
+    user_url: https://github.com/NISCHALPI
   - platform: google_scholar
     user_url: https://scholar.google.com/citations?user=YOUR_ID
   - platform: linkedin

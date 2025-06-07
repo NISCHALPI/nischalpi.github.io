@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
 // Base styles (resets, html/body, etc.) from main.scss and enhanced-styles.scss are consolidated here.
 
 /* Modern CSS Reset */
 *, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -15,19 +17,14 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans-serif);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-color);
+  font-family: var(--font-family-sans);
   background-color: var(--background-color);
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 16px; // Base font size
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color $transition-medium, color $transition-medium; // Smooth theme transitions
   overflow-x: hidden; /* Prevent horizontal scroll */
   
   &::after {
@@ -54,15 +51,15 @@ body {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color);
-  margin-top: 2em; /* More space above headings */
-  margin-bottom: 0.75em; /* Slightly more space below */
-  font-weight: 700; /* Bolder headings */
-  line-height: 1.3;
-  letter-spacing: -0.02em; /* Subtle letter spacing */
+  font-family: var(--font-family-headings, var(--font-family-sans)); // Use heading specific font if defined
+  font-weight: 700; // Bolder headings
+  line-height: 1.3; // Improved line height for headings
+  margin-top: $spacing-lg;
+  margin-bottom: $spacing-md;
 }
 
 h1 {
-  font-size: 2.5rem; /* Slightly larger h1 */
+  font-size: 2.5rem; // Responsive font sizes can be added via media queries
 }
 
 h2 {
@@ -91,22 +88,19 @@ h6 {
 }
 
 p {
-  margin-top: 0;
-  margin-bottom: 1.25em; /* More space between paragraphs */
+  margin-bottom: $spacing-md;
+  line-height: 1.7; // Slightly more leading for paragraphs
 }
 
 a {
   color: var(--link-color);
   text-decoration: none;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
-  text-decoration-thickness: 0.08em; /* Thicker underline */
-  text-underline-offset: 0.15em; /* More space between text and underline */
-}
+  transition: color $transition-short, background-color $transition-short, opacity $transition-short; // Smooth transitions for links
 
-a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
-  text-decoration-color: var(--link-hover-color); /* Ensure underline color changes on hover */
+  &:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline; // Optional: add underline on hover
+  }
 }
 
 /* Layout */
@@ -183,16 +177,57 @@ a:hover {
   align-items: center;
 }
 
+// Unified logo class for infinity symbol
+.logo {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+  font-size: 2rem;
+  
+  &:hover {
+    animation: logoRotate 0.6s ease-in-out;
+    cursor: pointer;
+  }
+  
+  // Size variations
+  &.logo-sm {
+    font-size: 1.5rem;
+  }
+  
+  &.logo-md {
+    font-size: 2rem;
+  }
+  
+  &.logo-lg {
+    font-size: 3rem;
+  }
+  
+  &.logo-xl {
+    font-size: 4rem;
+  }
+}
+
 .site-title {
-  font-size: 1.75rem; /* Larger site title */
+  font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--heading-color); /* Ensure title uses heading color */
-  transition: color 0.3s ease;
+  color: var(--heading-color);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  
+  .logo {
+    font-size: 2.2rem;
+    margin-right: 0.5rem;
+  }
 }
+
 .site-title:hover {
   text-decoration: none;
   color: var(--link-color);
+  transform: translateY(-2px);
 }
 
 
@@ -297,10 +332,14 @@ a:hover {
 }
 
 .footer-heading {
-  font-size: 1.1rem; /* Slightly smaller footer heading */
+  font-size: 1.1rem;
   margin-bottom: 1rem;
   color: var(--heading-color);
   font-weight: 600;
+  
+  .logo {
+    font-size: 1.8rem;
+  }
 }
 
 .social-media-list {

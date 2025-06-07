@@ -19,9 +19,11 @@
   --code-background: #{map-get($light-theme, 'code-background')};
   --card-background: #{map-get($light-theme, 'card-background')};
   --card-shadow: #{map-get($light-theme, 'card-shadow')};
+  --card-shadow-hover: #{map-get($light-theme, 'card-shadow-hover')}; // Added hover shadow variable
   --hover-background: #{map-get($light-theme, 'hover-background')};
   --scrollbar-thumb: #{map-get($light-theme, 'scrollbar-thumb')};
   --scrollbar-track: #{map-get($light-theme, 'scrollbar-track')};
+  --card-background-rgb-values: 255, 255, 255; // For #ffffff card background
 
   // Link colors for light theme
   --link-color: #{$primary-color};
@@ -30,17 +32,23 @@
   
   // Non-theme-specific variables
   --primary-color: #{$primary-color};
+  --primary-color-rgb: #{$primary-color-rgb}; // RGB values for rgba() functions
+  --primary-color-alpha-10: #{rgba($primary-color, 0.1)}; // For 10% opacity primary color
   --primary-color-dark: #{$primary-color-dark};
   --secondary-color: #{$secondary-color};
+  --secondary-color-rgb: #{$secondary-color-rgb}; // RGB values for rgba() functions
   --accent-color: #{$accent-color};
+  --accent-color-rgb: #{$accent-color-rgb}; // RGB values for rgba() functions
   --font-family-sans-serif: #{$font-stack-sans};
   --font-family-mono: #{$font-stack-mono};
   --font-family-serif: #{$font-stack-serif};
   --border-radius-sm: #{$border-radius-sm};
   --border-radius: #{$border-radius};
   --border-radius-lg: #{$border-radius-lg};
-  --box-shadow: #{$box-shadow};
-  --box-shadow-hover: #{$box-shadow-hover};
+  --box-shadow: #{$box-shadow-md}; // Default general box shadow
+  --box-shadow-lg: #{$box-shadow-lg}; // Larger shadow
+  --box-shadow-xl: #{$box-shadow-xl}; // X-Large shadow
+  --box-shadow-inset: #{$box-shadow-inset}; // Inset shadow
   --transition-standard: #{$transition-standard};
   --transition-fast: #{$transition-fast};
   --equation-background: #{$equation-background};
@@ -62,13 +70,15 @@
   --code-background: #{map-get($dark-theme, 'code-background')};
   --card-background: #{map-get($dark-theme, 'card-background')};
   --card-shadow: #{map-get($dark-theme, 'card-shadow')};
+  --card-shadow-hover: #{map-get($dark-theme, 'card-shadow-hover')}; // Added hover shadow variable for dark
   --hover-background: #{map-get($dark-theme, 'hover-background')};
   --scrollbar-thumb: #{map-get($dark-theme, 'scrollbar-thumb')};
   --scrollbar-track: #{map-get($dark-theme, 'scrollbar-track')};
+  --card-background-rgb-values: 31, 41, 55; // For #1f2937 card background
   
   // Link colors for dark theme
-  --link-color: #{lighten($primary-color, 10%)};
-  --link-hover-color: #{lighten($primary-color, 20%)};
+  --link-color: #{lighten($primary-color, 15%)}; // Make links a bit brighter in dark mode
+  --link-hover-color: #{lighten($primary-color, 25%)}; // Even brighter on hover
   --blockquote-color: #{map-get($dark-theme, 'text-color-soft')};
 }
 
@@ -93,8 +103,12 @@ body {
 // Style elements using CSS variables
 a {
   color: var(--link-color);
+  text-decoration: none; // Remove default underline, will add custom later if needed
+  transition: color var(--transition-fast), border-color var(--transition-fast); // Added border-color transition
+  
   &:hover {
     color: var(--link-hover-color);
+    // text-decoration: underline; // Consider if underline is desired on hover globally
   }
 }
 
@@ -170,9 +184,9 @@ code {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 6px;
-  border: 3px solid var(--scrollbar-track);
+  border: 3px solid var(--scrollbar-track); // Keep border consistent with track for seamless look
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-color-soft);
+  background: var(--text-color-soft); // Use a slightly more prominent color on hover
 }

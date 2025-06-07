@@ -84,3 +84,37 @@
     max-width: 1140px;
   }
 }
+
+/* Back to Top Button */
+.scroll-to-top {
+  display: none; 
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  z-index: 1000; // Ensure it's above other content
+  background-color: var(--primary-color, $primary-color);
+  color: var(--button-text-color, #fff); // Use a variable for button text color if available
+  border: none;
+  border-radius: $border-radius-round; // Make it circular
+  width: 50px;
+  height: 50px;
+  font-size: 1.25rem; // Icon size
+  cursor: pointer;
+  box-shadow: $box-shadow-md;
+  transition: opacity $transition-medium, background-color $transition-medium, transform $transition-medium;
+  // For centering the icon
+  align-items: center;
+  justify-content: center;
+  
+  &.visible {
+    display: flex; 
+  }
+
+  &:hover {
+    background-color: var(--primary-color-dark, darken($primary-color, 10%));
+    transform: scale(1.1);
+  }
+  i { // Style for the Font Awesome icon if used
+    line-height: 1; // Ensure icon is centered well within the flex container
+  }
+}

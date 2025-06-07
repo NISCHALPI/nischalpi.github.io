@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize page transitions
   initPageTransitions();
+  
+  // Enhanced infinity symbol interactions
+  initInfinityLogoEffects();
 });
 
 // Create smooth scrolling for anchor links
@@ -245,4 +248,116 @@ function initPageTransitions() {
   document.querySelectorAll('.animate-on-scroll').forEach(item => {
     observer.observe(item);
   });
+}
+
+// Enhanced infinity symbol interactions
+function initInfinityLogoEffects() {
+  const infinityLogos = document.querySelectorAll('.logo');
+  
+  infinityLogos.forEach(logo => {
+    // Only apply effects to infinity symbols
+    if (logo.classList.contains('fa-infinity')) {
+      // Add sparkle effect on hover
+      logo.addEventListener('mouseenter', function() {
+        createSparkleEffect(this);
+      });
+      
+      // Add click effect
+      logo.addEventListener('click', function(e) {
+        e.preventDefault();
+        createInfinityRipple(this, e);
+        
+        // Add a brief intense glow
+        this.style.filter = 'drop-shadow(0 0 20px rgba(var(--primary-color-rgb), 0.9))';
+        setTimeout(() => {
+          this.style.filter = '';
+        }, 300);
+      });
+    }
+  });
+}
+
+// Create sparkle particles around infinity symbol
+function createSparkleEffect(element) {
+  const rect = element.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  
+  for (let i = 0; i < 6; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'logo-sparkle';
+    sparkle.style.cssText = `
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: ${centerX}px;
+      top: ${centerY}px;
+      opacity: 0;
+    `;
+    
+    document.body.appendChild(sparkle);
+    
+    // Animate sparkle
+    const angle = (i * 60) * Math.PI / 180;
+    const distance = 30 + Math.random() * 20;
+    const endX = centerX + Math.cos(angle) * distance;
+    const endY = centerY + Math.sin(angle) * distance;
+    
+    sparkle.animate([
+      { 
+        transform: 'translate(0, 0) scale(0)', 
+        opacity: 0 
+      },
+      { 
+        transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(1)`, 
+        opacity: 1,
+        offset: 0.5
+      },
+      { 
+        transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0)`, 
+        opacity: 0 
+      }
+    ], {
+      duration: 800,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }).onfinish = () => {
+      sparkle.remove();
+    };
+  }
+}
+
+// Enhanced ripple effect specifically for infinity symbols
+function createInfinityRipple(element, event) {
+  const rect = element.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  
+  const ripple = document.createElement('div');
+  ripple.style.cssText = `
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 1px, rgba(var(--primary-color-rgb), 0.3) 1px);
+    transform: scale(0);
+    animation: logoRipple 0.6s linear;
+    left: ${x}px;
+    top: ${y}px;
+    width: ${size}px;
+    height: ${size}px;
+    pointer-events: none;
+  `;
+  
+  if (getComputedStyle(element).position === 'static') {
+    element.style.position = 'relative';
+  }
+  
+  element.appendChild(ripple);
+  
+  setTimeout(() => {
+    ripple.remove();
+  }, 600);
 }
