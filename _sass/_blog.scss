@@ -1331,6 +1331,25 @@
   }
 }
 
+// Override underline animations for post links and titles
+.post-link, .featured-post-title .post-link, .post-card-title .post-link {
+  &::after, &::before {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+  }
+  
+  &:hover {
+    text-decoration: none !important;
+  }
+  
+  &:focus, &:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
 // No posts message
 .no-posts-message {
   text-align: center;

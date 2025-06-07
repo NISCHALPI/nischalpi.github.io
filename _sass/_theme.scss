@@ -40,10 +40,17 @@
   --secondary-color-rgb: #{$secondary-color-rgb}; // RGB values for rgba() functions
   --accent-color: #{$accent-color};
   --accent-color-rgb: #{$accent-color-rgb}; // RGB values for rgba() functions
-  --font-family-sans-serif: #{$font-stack-sans};
-  --font-family-mono: #{$font-stack-mono};
+  --font-family-sans: #{$font-stack-sans};
   --font-family-serif: #{$font-stack-serif};
-  --font-heading: #{$font-stack-sans};
+  --font-family-mono: #{$font-stack-mono};
+  --font-family-heading: #{$font-stack-sans};
+  
+  // Font weights
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
   --border-radius-sm: #{$border-radius-sm};
   --border-radius: #{$border-radius};
   --border-radius-lg: #{$border-radius-lg};
