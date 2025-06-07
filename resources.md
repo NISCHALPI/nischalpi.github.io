@@ -12,10 +12,6 @@ permalink: /resources/
 
 ## Course Materials
 <div class="resources-section">
-  <div class="nav-arrows">
-    <button class="prev" onclick="scrollSection(this, 'prev')"><i class="fas fa-chevron-left"></i></button>
-    <button class="next" onclick="scrollSection(this, 'next')"><i class="fas fa-chevron-right"></i></button>
-  </div>
   <div class="resource-grid">
     <div class="resource-card animate__animated animate__fadeInUp">
       <div class="resource-header">
@@ -42,15 +38,63 @@ permalink: /resources/
         <a href="#"><i class="fas fa-download"></i>Download Materials</a>
       </div>
     </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Real Analysis Notes</h3>
+        <p class="meta">MATH 425</p>
+      </div>
+      <div class="resource-content">
+        <p>In-depth notes covering metric spaces, continuity, differentiation, and integration theory.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-download"></i>Download Materials</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Topology Study Guide</h3>
+        <p class="meta">MATH 520</p>
+      </div>
+      <div class="resource-content">
+        <p>Comprehensive study materials for point-set topology and algebraic topology fundamentals.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-download"></i>Download Materials</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Number Theory Problems</h3>
+        <p class="meta">MATH 412</p>
+      </div>
+      <div class="resource-content">
+        <p>Collection of solved problems in elementary and analytic number theory with detailed solutions.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-download"></i>Download Materials</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Abstract Algebra Guide</h3>
+        <p class="meta">MATH 320</p>
+      </div>
+      <div class="resource-content">
+        <p>Study materials covering groups, rings, and fields with numerous examples and exercises.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-download"></i>Download Materials</a>
+      </div>
+    </div>
   </div>
 </div>
 
 ## Recommended Books
 <div class="resources-section">
-  <div class="nav-arrows">
-    <button class="prev" onclick="scrollSection(this, 'prev')"><i class="fas fa-chevron-left"></i></button>
-    <button class="next" onclick="scrollSection(this, 'next')"><i class="fas fa-chevron-right"></i></button>
-  </div>
   <div class="resource-grid">
     <div class="book-card animate__animated animate__fadeInUp">
       <div class="book-cover">
@@ -102,14 +146,46 @@ permalink: /resources/
 
     <div class="book-card animate__animated animate__fadeInUp">
       <div class="book-cover">
-        <img src="/assets/images/books/abstract-algebra.jpg" alt="Abstract Algebra">
+        <img src="/assets/images/books/algebra.jpg" alt="Abstract Algebra">
       </div>
       <div class="resource-header">
         <h3>Abstract Algebra</h3>
-        <p class="meta">By David S. Dummit & Richard M. Foote</p>
+        <p class="meta">By David S. Dummit</p>
       </div>
       <div class="resource-content">
-        <p>A comprehensive text covering all aspects of modern algebra.</p>
+        <p>Comprehensive coverage of group theory, ring theory, and field theory with extensive examples.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-external-link-alt"></i>View Details</a>
+      </div>
+    </div>
+
+    <div class="book-card animate__animated animate__fadeInUp">
+      <div class="book-cover">
+        <img src="/assets/images/books/number-theory.jpg" alt="Elementary Number Theory">
+      </div>
+      <div class="resource-header">
+        <h3>Elementary Number Theory</h3>
+        <p class="meta">By David M. Burton</p>
+      </div>
+      <div class="resource-content">
+        <p>An excellent introduction to number theory with historical perspective and modern applications.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="#"><i class="fas fa-external-link-alt"></i>View Details</a>
+      </div>
+    </div>
+
+    <div class="book-card animate__animated animate__fadeInUp">
+      <div class="book-cover">
+        <img src="/assets/images/books/complex-analysis.jpg" alt="Complex Analysis">
+      </div>
+      <div class="resource-header">
+        <h3>Complex Analysis</h3>
+        <p class="meta">By Lars Ahlfors</p>
+      </div>
+      <div class="resource-content">
+        <p>Classic text on complex analysis with rigorous treatment and beautiful geometric insights.</p>
       </div>
       <div class="resource-footer">
         <a href="#"><i class="fas fa-external-link-alt"></i>View Details</a>
@@ -120,10 +196,6 @@ permalink: /resources/
 
 ## Software & Libraries
 <div class="resources-section">
-  <div class="nav-arrows">
-    <button class="prev" onclick="scrollSection(this, 'prev')"><i class="fas fa-chevron-left"></i></button>
-    <button class="next" onclick="scrollSection(this, 'next')"><i class="fas fa-chevron-right"></i></button>
-  </div>
   <div class="resource-grid">
     <div class="resource-card animate__animated animate__fadeInUp">
       <div class="resource-header">
@@ -176,15 +248,37 @@ permalink: /resources/
         <a href="https://www.geogebra.org" target="_blank"><i class="fas fa-external-link-alt"></i>Try Online</a>
       </div>
     </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Wolfram Alpha</h3>
+        <p class="meta">Computational Engine</p>
+      </div>
+      <div class="resource-content">
+        <p>Computational knowledge engine for step-by-step solutions and mathematical computation.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://www.wolframalpha.com" target="_blank"><i class="fas fa-external-link-alt"></i>Visit Site</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>LaTeX</h3>
+        <p class="meta">Typesetting System</p>
+      </div>
+      <div class="resource-content">
+        <p>Professional typesetting system for creating beautiful mathematical documents and papers.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://www.latex-project.org" target="_blank"><i class="fas fa-external-link-alt"></i>Get Started</a>
+      </div>
+    </div>
   </div>
 </div>
 
 ## Online Resources
 <div class="resources-section">
-  <div class="nav-arrows">
-    <button class="prev" onclick="scrollSection(this, 'prev')"><i class="fas fa-chevron-left"></i></button>
-    <button class="next" onclick="scrollSection(this, 'next')"><i class="fas fa-chevron-right"></i></button>
-  </div>
   <div class="resource-grid">
     <div class="resource-card animate__animated animate__fadeInUp">
       <div class="resource-header">
@@ -209,6 +303,58 @@ permalink: /resources/
       </div>
       <div class="resource-footer">
         <a href="#"><i class="fas fa-tasks"></i>View Problems</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Khan Academy</h3>
+        <p class="meta">Free Online Courses</p>
+      </div>
+      <div class="resource-content">
+        <p>Comprehensive mathematics courses from basic arithmetic to advanced calculus and linear algebra.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://www.khanacademy.org/math" target="_blank"><i class="fas fa-external-link-alt"></i>Visit Site</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>3Blue1Brown</h3>
+        <p class="meta">Visual Mathematics</p>
+      </div>
+      <div class="resource-content">
+        <p>Excellent video series explaining mathematical concepts through beautiful visualizations.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://www.3blue1brown.com" target="_blank"><i class="fas fa-video"></i>Watch Videos</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>Paul's Online Notes</h3>
+        <p class="meta">Calculus & Differential Equations</p>
+      </div>
+      <div class="resource-content">
+        <p>Comprehensive notes covering calculus, differential equations, and algebra with worked examples.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://tutorial.math.lamar.edu" target="_blank"><i class="fas fa-book-open"></i>Read Notes</a>
+      </div>
+    </div>
+
+    <div class="resource-card animate__animated animate__fadeInUp">
+      <div class="resource-header">
+        <h3>MIT OpenCourseWare</h3>
+        <p class="meta">University Courses</p>
+      </div>
+      <div class="resource-content">
+        <p>Free access to MIT mathematics course materials, including lectures, assignments, and exams.</p>
+      </div>
+      <div class="resource-footer">
+        <a href="https://ocw.mit.edu/courses/mathematics/" target="_blank"><i class="fas fa-graduation-cap"></i>Browse Courses</a>
       </div>
     </div>
   </div>

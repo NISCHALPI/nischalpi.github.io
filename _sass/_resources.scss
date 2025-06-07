@@ -11,141 +11,98 @@
 }
 
 .resources-section {
-  position: relative;
   margin-bottom: 3rem;
-  padding: 0 2.5rem; // Add padding for arrows
   
   h2 {
     color: var(--heading-color);
     margin-bottom: 1.5rem;
-  }
-
-  .nav-arrows {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    @extend %flex-between;
-
-    button {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      @extend .btn;
-      padding: 0;
-      background: var(--card-background);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      opacity: 0.9;
-      z-index: 10;
-
-      i {
-        font-size: 1rem;
-        margin-right: 0; // Override btn mixin margin
-      }
-
-      &:hover {
-        background: var(--primary-color);
-        color: white;
-        transform: scale(1.05);
-        opacity: 1;
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-
-      &:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-        background: var(--card-background);
-        color: var(--text-color);
-        transform: none;
-        box-shadow: none;
-      }
-
-      &.prev {
-        margin-left: -22px;
-      }
-
-      &.next {
-        margin-right: -22px;
-      }
-    }
+    font-size: 1.5rem;
   }
 }
 
 .resource-grid {
-  // Using custom grid for horizontal scrolling instead of standard grid-layout mixin
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc(33.333% - 1.33rem);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   width: 100%;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding: 1rem 0;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  touch-action: pan-x pan-y; // Allow both horizontal and vertical scrolling on desktop
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--background-color);
   
+  // Custom scrollbar styling
   &::-webkit-scrollbar {
-    display: none;
+    width: 8px;
   }
-
-  // Ensure cards snap to grid
-  .resource-card, .book-card {
-    scroll-snap-align: start;
+  
+  &::-webkit-scrollbar-track {
+    background: var(--card-background);
+    border-radius: 4px;
   }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+    
+    &:hover {
+      background: var(--primary-color-dark);
+    }
+  }
+  
+  // For Firefox
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--card-background);
 }
 
 .resource-card {
   @extend %card-with-hover;
-  padding: 1.5rem;
+  padding: 1rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
 
   .resource-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 
     h3 {
       color: var(--heading-color);
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
     }
 
     .meta {
       color: var(--text-color-soft);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
   }
 
   .resource-content {
     @extend %card-content;
     padding: 0;
+    flex-grow: 1;
     
     p {
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 0.9rem;
+      line-height: 1.4;
       color: var(--text-color);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
   }
 
   .resource-footer {
     @extend %card-footer;
     border-top: 1px solid var(--border-color);
+    margin-top: auto;
     
     a {
       @extend .btn;
       @extend .btn-sm;
       @extend .btn-primary;
+      font-size: 0.85rem;
+      padding: 0.5rem 0.75rem;
       
       i {
         margin-right: 0.5rem;
@@ -160,8 +117,8 @@
   
   .book-cover {
     width: 100%;
-    height: 200px;
-    margin-bottom: 1rem;
+    height: 120px;
+    margin-bottom: 0.75rem;
     overflow: hidden;
     border-radius: var(--border-radius-sm);
     
@@ -176,29 +133,22 @@
 // Responsive adjustments
 @media (max-width: 1200px) {
   .resource-grid {
-    grid-auto-columns: calc(50% - 1rem);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .resource-grid {
-    grid-auto-columns: calc(100% - 1rem);
-    overflow-x: visible; // Disable horizontal scrolling on mobile
-    grid-auto-flow: row; // Stack cards vertically instead of horizontally
-    scroll-snap-type: none; // Remove snap scrolling on mobile
-    touch-action: pan-y; // Only allow vertical scrolling on touch devices
+    grid-template-columns: 1fr;
+    max-height: 300px;
+    gap: 1rem;
   }
   
   .resource-card, .book-card {
-    touch-action: pan-y; // Ensure cards only allow vertical scrolling
-    scroll-snap-align: none; // Remove snap alignment on mobile
+    min-height: 180px;
   }
   
-  .resources-section {
-    padding: 0;
-    
-    .nav-arrows {
-      display: none; // Hide arrows on mobile
-    }
+  .book-card .book-cover {
+    height: 100px;
   }
 }

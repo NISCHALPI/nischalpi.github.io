@@ -288,28 +288,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // Filter and display search results
     const searchResultsHtml = [];
     
-    postCards.forEach((card, i) => {
-      const title = card.getAttribute('data-title') || '';
-      const content = card.getAttribute('data-content') || '';
-      const tags = card.getAttribute('data-tags') || '';
+    // Create an array of all posts to search through (including featured post)
+    const allPosts = [];
+    
+    // Add featured post if it exists
+    if (featuredPost) {
+      allPosts.push(featuredPost);
+    }
+    
+    // Add all regular post cards
+    postCards.forEach(card => {
+      allPosts.push(card);
+    });
+    
+    allPosts.forEach((card, i) => {
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      const content = (card.getAttribute('data-content') || '').toLowerCase();
+      const tags = (card.getAttribute('data-tags') || '').toLowerCase();
       
       if (title.includes(query) || content.includes(query) || tags.includes(query)) {
         matchCount++;
         
         // Get post details from the card
         const postLink = card.querySelector('.post-link');
-        const postTitle = card.querySelector('.post-card-title');
-        const postExcerpt = card.querySelector('.post-card-excerpt');
-        const postMeta = card.querySelector('.post-card-meta');
+        const postTitle = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-title') 
+          : card.querySelector('.post-card-title');
+        const postExcerpt = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-excerpt') 
+          : card.querySelector('.post-card-excerpt');
+        const postMeta = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-meta') 
+          : card.querySelector('.post-card-meta');
         const categoryTag = card.querySelector('.article-category-tag');
         const postTags = card.querySelector('.post-tags');
         
         if (postLink && postTitle) {
+          const isFeaturedResult = card.classList.contains('featured-post-card');
           const searchResultItem = `
             <article class="search-result-item animate__animated animate__fadeInUp" style="animation-delay: ${(matchCount - 1) * 100}ms">
               <div class="search-result-content">
                 <header class="search-result-header">
                   ${categoryTag ? categoryTag.outerHTML : ''}
+                  ${isFeaturedResult ? '<div class="featured-indicator"><i class="fas fa-crown"></i><span>Featured</span></div>' : ''}
                   <h3 class="search-result-title">
                     <a href="${postLink.href}" class="post-link">${postTitle.textContent.trim()}</a>
                   </h3>
@@ -405,25 +426,46 @@ document.addEventListener('DOMContentLoaded', function() {
     let visibleCount = 0;
     const tagResultsHtml = [];
     
+    // Create an array of all posts to search through (including featured post)
+    const allPosts = [];
+    
+    // Add featured post if it exists
+    if (featuredPost) {
+      allPosts.push(featuredPost);
+    }
+    
+    // Add all regular post cards
     postCards.forEach(card => {
-      const cardTags = card.getAttribute('data-tags') || '';
+      allPosts.push(card);
+    });
+    
+    allPosts.forEach(card => {
+      const cardTags = (card.getAttribute('data-tags') || '').toLowerCase();
       if (cardTags.includes(tag.toLowerCase())) {
         visibleCount++;
         
         // Get post details from the card
         const postLink = card.querySelector('.post-link');
-        const postTitle = card.querySelector('.post-card-title');
-        const postExcerpt = card.querySelector('.post-card-excerpt');
-        const postMeta = card.querySelector('.post-card-meta');
+        const postTitle = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-title') 
+          : card.querySelector('.post-card-title');
+        const postExcerpt = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-excerpt') 
+          : card.querySelector('.post-card-excerpt');
+        const postMeta = card.classList.contains('featured-post-card') 
+          ? card.querySelector('.featured-post-meta') 
+          : card.querySelector('.post-card-meta');
         const categoryTag = card.querySelector('.article-category-tag');
         const postTags = card.querySelector('.post-tags');
         
         if (postLink && postTitle) {
+          const isFeaturedResult = card.classList.contains('featured-post-card');
           const tagResultItem = `
             <article class="search-result-item animate__animated animate__fadeInUp" style="animation-delay: ${(visibleCount - 1) * 100}ms">
               <div class="search-result-content">
                 <header class="search-result-header">
                   ${categoryTag ? categoryTag.outerHTML : ''}
+                  ${isFeaturedResult ? '<div class="featured-indicator"><i class="fas fa-crown"></i><span>Featured</span></div>' : ''}
                   <h3 class="search-result-title">
                     <a href="${postLink.href}" class="post-link">${postTitle.textContent.trim()}</a>
                   </h3>
@@ -485,14 +527,26 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update posts count
   function updatePostsCount() {
     let visibleCount = 0;
+    let totalCount = 0;
+    
+    // Count featured post if it exists and is visible
+    if (featuredPost) {
+      totalCount++;
+      if (featuredPost.style.display !== 'none') {
+        visibleCount++;
+      }
+    }
+    
+    // Count regular post cards
     postCards.forEach(card => {
+      totalCount++;
       if (card.style.display !== 'none') {
         visibleCount++;
       }
     });
     
     if (postsCount) {
-      postsCount.textContent = `Showing ${visibleCount} of ${postCards.length} posts`;
+      postsCount.textContent = `Showing ${visibleCount} of ${totalCount} posts`;
     }
   }
   
