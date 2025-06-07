@@ -243,16 +243,50 @@ document.addEventListener('DOMContentLoaded', function() {
           card.style.animationDelay = (i * 100) + 'ms';
         }, 50);
       });
+      
+      // Show featured post and main sections
       if (featuredPost) {
         featuredPost.style.display = '';
         featuredPost.classList.add('animate__animated', 'animate__fadeIn');
       }
+      
+      // Show main sections
+      const featuredSection = document.querySelector('.featured-section');
+      const allPostsSection = document.querySelector('.all-posts-section');
+      const blogControlsBar = document.querySelector('.blog-controls-bar');
+      const paginationNav = document.querySelector('.pagination-nav');
+      
+      if (featuredSection) featuredSection.style.display = 'block';
+      if (allPostsSection) allPostsSection.style.display = 'block';
+      if (blogControlsBar) blogControlsBar.style.display = 'block';
+      if (paginationNav) paginationNav.style.display = 'block';
+      
       if (searchResults) {
         searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
       }
       updatePostsCount();
       return;
     }
+    
+    // Hide main sections during search for clean interface
+    const featuredSection = document.querySelector('.featured-section');
+    const allPostsSection = document.querySelector('.all-posts-section');
+    const blogControlsBar = document.querySelector('.blog-controls-bar');
+    const paginationNav = document.querySelector('.pagination-nav');
+    
+    if (featuredSection) featuredSection.style.display = 'none';
+    if (allPostsSection) allPostsSection.style.display = 'none';
+    if (blogControlsBar) blogControlsBar.style.display = 'none';
+    if (paginationNav) paginationNav.style.display = 'none';
+    
+    // Show search results container
+    if (searchResults) {
+      searchResults.style.display = 'block';
+    }
+    
+    // Filter and display search results
+    const searchResultsHtml = [];
     
     postCards.forEach((card, i) => {
       const title = card.getAttribute('data-title') || '';
@@ -260,73 +294,192 @@ document.addEventListener('DOMContentLoaded', function() {
       const tags = card.getAttribute('data-tags') || '';
       
       if (title.includes(query) || content.includes(query) || tags.includes(query)) {
-        card.style.display = '';
-        // Animate matching cards with consistent but staggered animation
-        card.classList.add('animate__animated', 'animate__fadeInUp');
-        card.style.animationDelay = (matchCount * 100) + 'ms';
         matchCount++;
-      } else {
-        card.style.display = 'none';
-        // Remove animation classes from hidden cards
-        card.classList.remove('animate__animated', 'animate__fadeInUp');
+        
+        // Get post details from the card
+        const postLink = card.querySelector('.post-link');
+        const postTitle = card.querySelector('.post-card-title');
+        const postExcerpt = card.querySelector('.post-card-excerpt');
+        const postMeta = card.querySelector('.post-card-meta');
+        const categoryTag = card.querySelector('.article-category-tag');
+        const postTags = card.querySelector('.post-tags');
+        
+        if (postLink && postTitle) {
+          const searchResultItem = `
+            <article class="search-result-item animate__animated animate__fadeInUp" style="animation-delay: ${(matchCount - 1) * 100}ms">
+              <div class="search-result-content">
+                <header class="search-result-header">
+                  ${categoryTag ? categoryTag.outerHTML : ''}
+                  <h3 class="search-result-title">
+                    <a href="${postLink.href}" class="post-link">${postTitle.textContent.trim()}</a>
+                  </h3>
+                  ${postMeta ? `<div class="search-result-meta">${postMeta.innerHTML}</div>` : ''}
+                </header>
+                ${postExcerpt ? `<div class="search-result-excerpt">${postExcerpt.innerHTML}</div>` : ''}
+                <footer class="search-result-footer">
+                  ${postTags ? postTags.outerHTML : ''}
+                  <a href="${postLink.href}" class="read-more-link">
+                    <span>Read Article</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </footer>
+              </div>
+            </article>
+          `;
+          searchResultsHtml.push(searchResultItem);
+        }
       }
     });
     
-    // Hide featured post during search
-    if (featuredPost) featuredPost.style.display = 'none';
-    
     // Update search results display
     if (searchResults) {
-      searchResults.innerHTML = '';
       if (matchCount > 0) {
-        const resultText = document.createElement('div');
-        resultText.className = 'search-result-summary';
-        resultText.textContent = `Found ${matchCount} matching article${matchCount !== 1 ? 's' : ''}`;
-        searchResults.appendChild(resultText);
-        searchResults.style.display = 'block';
+        searchResults.innerHTML = `
+          <div class="search-results-header">
+            <h3 class="search-results-title">
+              <i class="fas fa-search"></i>
+              Search Results for "${query}"
+            </h3>
+            <p class="search-results-count">${matchCount} article${matchCount !== 1 ? 's' : ''} found</p>
+            <button class="show-all-btn" onclick="showAllPosts()">
+              <i class="fas fa-grid-3x3"></i>
+              <span>Show All Posts</span>
+            </button>
+          </div>
+          <div class="search-results-grid">
+            ${searchResultsHtml.join('')}
+          </div>
+        `;
       } else {
-        const noResults = document.createElement('div');
-        noResults.className = 'search-no-results';
-        noResults.innerHTML = '<i class="fas fa-search"></i><span>No matching posts found</span>';
-        searchResults.appendChild(noResults);
-        searchResults.style.display = 'block';
+        searchResults.innerHTML = `
+          <div class="search-no-results">
+            <div class="no-results-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>No articles found</h3>
+            <p>No articles match your search for "<strong>${query}</strong>". Try different keywords or check the spelling.</p>
+            <div class="search-suggestions-list">
+              <p>You might want to search for:</p>
+              <ul>
+                <li><button class="suggestion-btn" onclick="document.getElementById('blog-search').value='topology'; document.getElementById('blog-search').dispatchEvent(new Event('input'));">Topology</button></li>
+                <li><button class="suggestion-btn" onclick="document.getElementById('blog-search').value='analysis'; document.getElementById('blog-search').dispatchEvent(new Event('input'));">Analysis</button></li>
+                <li><button class="suggestion-btn" onclick="document.getElementById('blog-search').value='number theory'; document.getElementById('blog-search').dispatchEvent(new Event('input'));">Number Theory</button></li>
+                <li><button class="suggestion-btn" onclick="document.getElementById('blog-search').value='euler'; document.getElementById('blog-search').dispatchEvent(new Event('input'));">Euler</button></li>
+              </ul>
+            </div>
+            <button class="show-all-btn" onclick="showAllPosts()">
+              <i class="fas fa-grid-3x3"></i>
+              <span>Show All Posts</span>
+            </button>
+          </div>
+        `;
       }
     }
-    
-    updatePostsCount();
   }
   
   // Filter by tag functionality
   function filterByTag(tag) {
-    // Filter posts
+    // Clear search input first
+    if (searchInput) {
+      searchInput.value = '';
+    }
+    toggleClearSearchButton();
+    
+    // Hide main sections during filtering for clean interface
+    const featuredSection = document.querySelector('.featured-section');
+    const allPostsSection = document.querySelector('.all-posts-section');
+    const blogControlsBar = document.querySelector('.blog-controls-bar');
+    const paginationNav = document.querySelector('.pagination-nav');
+    
+    if (featuredSection) featuredSection.style.display = 'none';
+    if (allPostsSection) allPostsSection.style.display = 'none';
+    if (blogControlsBar) blogControlsBar.style.display = 'none';
+    if (paginationNav) paginationNav.style.display = 'none';
+    
+    // Show search results container
+    if (searchResults) {
+      searchResults.style.display = 'block';
+    }
+    
+    // Filter and display tag results
     let visibleCount = 0;
+    const tagResultsHtml = [];
     
     postCards.forEach(card => {
       const cardTags = card.getAttribute('data-tags') || '';
       if (cardTags.includes(tag.toLowerCase())) {
-        card.style.display = '';
-        card.classList.add('animate__animated', 'animate__fadeInUp');
-        card.style.animationDelay = (visibleCount * 100) + 'ms';
         visibleCount++;
-      } else {
-        card.style.display = 'none';
-        card.classList.remove('animate__animated', 'animate__fadeInUp');
+        
+        // Get post details from the card
+        const postLink = card.querySelector('.post-link');
+        const postTitle = card.querySelector('.post-card-title');
+        const postExcerpt = card.querySelector('.post-card-excerpt');
+        const postMeta = card.querySelector('.post-card-meta');
+        const categoryTag = card.querySelector('.article-category-tag');
+        const postTags = card.querySelector('.post-tags');
+        
+        if (postLink && postTitle) {
+          const tagResultItem = `
+            <article class="search-result-item animate__animated animate__fadeInUp" style="animation-delay: ${(visibleCount - 1) * 100}ms">
+              <div class="search-result-content">
+                <header class="search-result-header">
+                  ${categoryTag ? categoryTag.outerHTML : ''}
+                  <h3 class="search-result-title">
+                    <a href="${postLink.href}" class="post-link">${postTitle.textContent.trim()}</a>
+                  </h3>
+                  ${postMeta ? `<div class="search-result-meta">${postMeta.innerHTML}</div>` : ''}
+                </header>
+                ${postExcerpt ? `<div class="search-result-excerpt">${postExcerpt.innerHTML}</div>` : ''}
+                <footer class="search-result-footer">
+                  ${postTags ? postTags.outerHTML : ''}
+                  <a href="${postLink.href}" class="read-more-link">
+                    <span>Read Article</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </footer>
+              </div>
+            </article>
+          `;
+          tagResultsHtml.push(tagResultItem);
+        }
       }
     });
     
-    // Hide featured post during filtering
-    if (featuredPost) featuredPost.style.display = 'none';
-    
-    // Clear search
-    if (searchInput) {
-      searchInput.value = '';
-    }
+    // Update search results display
     if (searchResults) {
-      searchResults.style.display = 'none';
+      if (visibleCount > 0) {
+        searchResults.innerHTML = `
+          <div class="search-results-header">
+            <h3 class="search-results-title">
+              <i class="fas fa-tag"></i>
+              Articles tagged with "${tag.replace('-', ' ')}"
+            </h3>
+            <p class="search-results-count">${visibleCount} article${visibleCount !== 1 ? 's' : ''} found</p>
+            <button class="show-all-btn" onclick="showAllPosts()">
+              <i class="fas fa-grid-3x3"></i>
+              <span>Show All Posts</span>
+            </button>
+          </div>
+          <div class="search-results-grid">
+            ${tagResultsHtml.join('')}
+          </div>
+        `;
+      } else {
+        searchResults.innerHTML = `
+          <div class="search-no-results">
+            <div class="no-results-icon">
+              <i class="fas fa-tag"></i>
+            </div>
+            <h3>No articles found</h3>
+            <p>No articles are tagged with "<strong>${tag.replace('-', ' ')}</strong>".</p>
+            <button class="show-all-btn" onclick="showAllPosts()">
+              <i class="fas fa-grid-3x3"></i>
+              <span>Show All Posts</span>
+            </button>
+          </div>
+        `;
+      }
     }
-    toggleClearSearchButton();
-    
-    updatePostsCount();
   }
   
   // Update posts count
@@ -352,5 +505,56 @@ document.addEventListener('DOMContentLoaded', function() {
         filterByTag(tagValue);
       }
     });
+  });
+  
+  // Function to show all posts (reset to normal view)
+  window.showAllPosts = function() {
+    // Clear search input
+    if (searchInput) {
+      searchInput.value = '';
+    }
+    toggleClearSearchButton();
+    
+    // Show main sections
+    const featuredSection = document.querySelector('.featured-section');
+    const allPostsSection = document.querySelector('.all-posts-section');
+    const blogControlsBar = document.querySelector('.blog-controls-bar');
+    const paginationNav = document.querySelector('.pagination-nav');
+    
+    if (featuredSection) featuredSection.style.display = 'block';
+    if (allPostsSection) allPostsSection.style.display = 'block';
+    if (blogControlsBar) blogControlsBar.style.display = 'block';
+    if (paginationNav) paginationNav.style.display = 'block';
+    
+    // Hide search results
+    if (searchResults) {
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+    }
+    
+    // Reset all post cards visibility
+    postCards.forEach((card, i) => {
+      card.style.display = '';
+      // Re-animate cards with staggered delay
+      setTimeout(() => {
+        card.classList.add('animate__animated', 'animate__fadeInUp');
+        card.style.animationDelay = (i * 50) + 'ms';
+      }, 50);
+    });
+    
+    // Show featured post
+    if (featuredPost) {
+      featuredPost.style.display = '';
+      featuredPost.classList.add('animate__animated', 'animate__fadeIn');
+    }
+    
+    updatePostsCount();
+  };
+  
+  // Add escape key functionality to reset search
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && searchInput && (searchInput.value || searchResults.style.display === 'block')) {
+      window.showAllPosts();
+    }
   });
 });
