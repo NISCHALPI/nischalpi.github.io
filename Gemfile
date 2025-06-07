@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 
-# When building locally, use Jekyll directly
-gem "jekyll", "~> 3.9.0"
-
-# For GitHub Pages compatibility
+# For GitHub Pages compatibility - this should be the primary gem
 gem "github-pages", group: :jekyll_plugins
+
+# Only use Jekyll directly for local development
+# Uncomment the line below for local development only
+# gem "jekyll", "~> 3.9.0"
 
 # Theme
 gem "minima", "~> 2.5"

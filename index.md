@@ -6,15 +6,15 @@ title: "Home"
 <section class="hero-section">
   <div class="professional-profile">
     <div class="profile-header">
-      <img src="{{ site.baseurl }}/assets/images/profile.jpg" alt="Dr. Math Scholar" class="profile-image">
+      <img src="{{ site.baseurl }}/assets/images/profile.jpg" alt="Nischal Bhattarai" class="profile-image">
       <div class="profile-title">
-        <h1>Dr. Math Scholar</h1>
-        <p class="designation">Mathematics PhD | Researcher | Educator</p>
+        <h1>Nischal Bhattarai</h1>
+        <p class="designation">Mathematics PhD Student | Researcher | Educator</p>
       </div>
     </div>
     
     <div class="professional-bio">
-      <p>I am a Mathematics PhD candidate specializing in [Your Specialty Area] at [Your University], focused on developing novel solutions to complex mathematical problems with real-world applications.</p>
+      <p>I am a Mathematics PhD student specializing in Mathematical Analysis and Probability Theory at Texas A&M University, focused on developing novel solutions to complex mathematical problems with real-world applications.</p>
     </div>
     
     <div class="hero-buttons">

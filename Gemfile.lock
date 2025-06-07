@@ -314,7 +314,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   http_parser.rb (~> 0.8.0)
-  jekyll (~> 3.9.0)
   jekyll-feed (~> 0.17.0)
   jekyll-paginate
   jekyll-scholar

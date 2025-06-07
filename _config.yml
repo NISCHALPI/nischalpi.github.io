@@ -1,14 +1,14 @@
 # Site configuration for mathematics PhD portfolio
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "/math-portfolio" # the subpath of your site, e.g. /blog
-title: "-|" # the name of your site, e.g. ACME Corp.
-description: "Mathematics PhD Student - Specializing in Analysis and Probability" # a short description of your site
-author: "Mr. Nischal Bhattarai" # your name, e.g. John Doe
+url: "https://nischalpi.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/GithubPagesIter1" # the subpath of your site, e.g. /blog
+title: "Nischal Bhattarai | Mathematics PhD"
+description: "Mathematics PhD Student - Specializing in Analysis and Probability"
+author: "Nischal Bhattarai"
 email: "nbhattarai@tamu.edu"
-logo: "/assets/images/profile.jpg" # for minimal theme
-repository: "username/math-portfolio" # IMPORTANT: Replace this with your actual GitHub username/repo-name
+logo: "/assets/images/profile.jpg"
+repository: "NISCHALPI/GithubPagesIter1"
 github:
-  repository_nwo: "username/math-portfolio" # IMPORTANT: Replace this with your actual GitHub username/repo-name
+  repository_nwo: "NISCHALPI/GithubPagesIter1"
 
 # Build settings
 markdown: kramdown
@@ -28,10 +28,9 @@ sass:
     - node_modules
 
 # Theme settings
-# For local development:
+# For GitHub Pages deployment - use minima for better compatibility:
 theme: minima
-# For GitHub Pages (uncomment when deploying):
-# theme: jekyll-theme-minimal
+# Use remote_theme only if you need a specific GitHub Pages theme
 # remote_theme: pages-themes/minimal@v0.2.0
 
 # Navigation
@@ -48,15 +47,15 @@ social:
   - platform: github
     user_url: https://github.com/NISCHALPI
   - platform: google_scholar
-    user_url: https://scholar.google.com/citations?user=YOUR_ID
+    user_url: https://scholar.google.com/citations?user=PLACEHOLDER_ID
   - platform: linkedin
-    user_url: https://linkedin.com/in/username
+    user_url: https://linkedin.com/in/nischal-bhattarai
   - platform: orcid
-    user_url: https://orcid.org/0000-0000-0000-0000
+    user_url: https://orcid.org/PLACEHOLDER_ID
     
 # Pagination
 paginate: 5
-paginate_path: "/blog/page:num/index.html"
+paginate_path: "/blog/page:num/"
 
 # Math settings - enable MathJax
 mathjax: true
