@@ -301,58 +301,7 @@ $spacers: (
   cursor: zoom-out;
 }
 
-/* Footer Styling */
-.site-footer {
-  background-color: var(--surface-color);
-  border-top: 1px solid var(--border-color);
-  padding: 3rem 0 2rem;
-  margin-top: 4rem;
-  color: var(--text-color);
-}
-
-.footer-col-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-}
-
-.footer-col {
-  flex: 1;
-  min-width: 250px;
-  margin-bottom: 1.5rem;
-  padding-right: 2rem;
-  
-  @media (max-width: 768px) {
-    padding-right: 0;
-  }
-  
-  &:last-child {
-    padding-right: 0;
-  }
-}
-
-.footer-heading {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  color: var(--heading-color);
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background-color: var(--primary-color);
-  }
-}
+/* Footer styles are now in _footer.scss */
 
 .social-media-list {
   list-style: none;

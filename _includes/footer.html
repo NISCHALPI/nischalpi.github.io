@@ -1,56 +1,196 @@
 <footer class="site-footer animate__animated animate__fadeIn">
-  <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <h2 class="footer-heading"><i class="fas fa-infinity logo"></i></h2>
-        <p>{{ site.description | escape }}</p>
-      </div>
-      <div class="footer-col">
-        <h2 class="footer-heading">Connect</h2>
-        <ul class="social-media-list">
-          {%- for social in site.social -%}
-            <li>
-              <a href="{{ social.user_url }}" title="{{ social.platform }}" target="_blank" rel="noopener noreferrer">
-                {% if social.platform == 'google_scholar' %}
-                <i class="ai ai-google-scholar"></i>
-                {% elsif social.platform == 'orcid' %}
-                <i class="ai ai-orcid"></i>
-                {% elsif social.platform == 'researchgate' %}
-                <i class="ai ai-researchgate"></i>
-                {% else %}
-                <i class="fab fa-{{ social.platform | downcase }}"></i>
-                {% endif %}
-                <span class="username">{{ social.platform | capitalize }}</span>
+  <!-- Main footer content -->
+  <div class="footer-main">
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <!-- Brand section -->
+        <div class="footer-col footer-brand">
+          <div class="brand-container">
+            <div class="footer-logo">
+              <a class="site-title" rel="author" href="{{ "/" | relative_url }}">
+                <i class="fas fa-infinity logo animate__animated animate__pulse animate__infinite"></i>
               </a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2 class="footer-heading">Contact</h2>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-        {% if site.location %}
-        <p><i class="fas fa-map-marker-alt"></i> {{ site.location }}</p>
-        {% endif %}
+            </div>
+            <p class="brand-description">{{ site.description | escape }}</p>
+          </div>
+          
+          <!-- Quick stats or info -->
+          <div class="footer-stats">
+            <div class="stat-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Research & Teaching</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-book-open"></i>
+              <span>Educational Resources</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col footer-links">
+          <h3 class="footer-heading">Quick Links</h3>
+          <nav class="footer-nav">
+            <ul>
+              <li><a href="{{ '/' | relative_url }}"><i class="fas fa-home"></i>Home</a></li>
+              <li><a href="{{ '/research/' | relative_url }}"><i class="fas fa-flask"></i>Research</a></li>
+              <li><a href="{{ '/teaching/' | relative_url }}"><i class="fas fa-chalkboard-teacher"></i>Teaching</a></li>
+              <li><a href="{{ '/blog/' | relative_url }}"><i class="fas fa-blog"></i>Blog</a></li>
+              <li><a href="{{ '/resources/' | relative_url }}"><i class="fas fa-archive"></i>Resources</a></li>
+              <li><a href="{{ '/contact/' | relative_url }}"><i class="fas fa-envelope"></i>Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Connect section -->
+        <div class="footer-col footer-connect">
+          <h3 class="footer-heading">Connect</h3>
+          <div class="social-section">
+            <ul class="social-media-list">
+              {%- for social in site.social -%}
+                <li>
+                  <a href="{{ social.user_url }}" title="{{ social.platform }}" target="_blank" rel="noopener noreferrer" class="social-link">
+                    {% if social.platform == 'google_scholar' %}
+                    <i class="ai ai-google-scholar"></i>
+                    {% elsif social.platform == 'orcid' %}
+                    <i class="ai ai-orcid"></i>
+                    {% elsif social.platform == 'researchgate' %}
+                    <i class="ai ai-researchgate"></i>
+                    {% else %}
+                    <i class="fab fa-{{ social.platform | downcase }}"></i>
+                    {% endif %}
+                    <span class="username">{{ social.platform | capitalize }}</span>
+                    <span class="link-arrow"><i class="fas fa-external-link-alt"></i></span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+          
+          <!-- Contact info -->
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+            </div>
+            {% if site.location %}
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ site.location }}</span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="copyright">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
+  </div>
+
+  <!-- Footer bottom - full width background -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-bg"></div>
+    <div class="wrapper">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
+          <p class="footer-tagline">Exploring the beauty of mathematics through research and education</p>
+        </div>
+        
+        <div class="footer-actions">
+          <div class="theme-info">
+            <span class="theme-label">Theme:</span>
+            <span class="current-theme">Auto</span> 
+          </div>
+          <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
 
+{% raw %}
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update theme indicator in footer
+        updateThemeIndicator();
+      });
+    }
+    
+    // Update theme indicator
+    function updateThemeIndicator() {
+      const themeIndicator = document.querySelector('.current-theme');
+      if (themeIndicator) {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        themeIndicator.textContent = currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1);
+      }
+    }
+    
+    // Initialize theme indicator
+    updateThemeIndicator();
+    
+    // Enhanced scroll animations for footer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const footerElements = entry.target.querySelectorAll('.footer-col, .social-link, .footer-actions > *');
+          footerElements.forEach((el, index) => {
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, index * 100);
+          });
+        }
+      });
+    }, observerOptions);
+    
+    const footer = document.querySelector('.site-footer');
+    if (footer) {
+      // Initially hide elements for animation
+      const animatedElements = footer.querySelectorAll('.footer-col, .social-link, .footer-actions > *');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
       
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+      footerObserver.observe(footer);
+    }
+    
+    // Social link hover effects
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        // Add subtle animation to other links
+        socialLinks.forEach(otherLink => {
+          if (otherLink !== link) {
+            otherLink.style.opacity = '0.7';
+          }
+        });
+      });
+      
+      link.addEventListener('mouseleave', () => {
+        // Reset all links
+        socialLinks.forEach(otherLink => {
+          otherLink.style.opacity = '1';
+        });
+      });
     });
     
     // Add animation classes to elements when they enter viewport
@@ -72,5 +212,15 @@
     
     // Run once on page load
     animateOnScroll();
+    
+    // Add year auto-update
+    const currentYear = new Date().getFullYear();
+    const copyrightYears = document.querySelectorAll('.copyright p:first-child');
+    copyrightYears.forEach(el => {
+      if (el.textContent.includes('2025')) {
+        el.textContent = el.textContent.replace(/\d{4}/, currentYear);
+      }
+    });
   });
 </script>
+{% endraw %}

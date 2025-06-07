@@ -59,7 +59,8 @@ $light-theme: (
   card-shadow-hover: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Hover shadow
   hover-background: rgba(59, 130, 246, 0.08), // Slightly more noticeable hover
   scrollbar-thumb: rgba(17, 24, 39, 0.25), // Darker scrollbar thumb
-  scrollbar-track: rgba(229, 231, 235, 0.8) // Lighter track
+  scrollbar-track: rgba(229, 231, 235, 0.8), // Lighter track
+  footer-background: #f8fafc // Slightly lighter than page background
 );
 
 // Theme colors - Dark Mode
@@ -78,7 +79,8 @@ $dark-theme: (
   card-shadow-hover: "0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15)", // Dark hover
   hover-background: rgba(59, 130, 246, 0.1), // Subtle hover for dark
   scrollbar-thumb: rgba(209, 213, 219, 0.3), // Lighter scrollbar thumb
-  scrollbar-track: rgba(17, 24, 39, 0.8)    // Darker track
+  scrollbar-track: rgba(17, 24, 39, 0.8),    // Darker track
+  footer-background: #0f172a // Darker than page background
 );
 
 // Typography - Enhanced font stacks for better readability

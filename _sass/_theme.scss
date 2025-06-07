@@ -24,6 +24,7 @@
   --hover-background: #{map-get($light-theme, 'hover-background')};
   --scrollbar-thumb: #{map-get($light-theme, 'scrollbar-thumb')};
   --scrollbar-track: #{map-get($light-theme, 'scrollbar-track')};
+  --footer-background: #{map-get($light-theme, 'footer-background')};
   --card-background-rgb-values: 255, 255, 255; // For #ffffff card background
 
   // Link colors for light theme
@@ -84,6 +85,7 @@
   --hover-background: #{map-get($dark-theme, 'hover-background')};
   --scrollbar-thumb: #{map-get($dark-theme, 'scrollbar-thumb')};
   --scrollbar-track: #{map-get($dark-theme, 'scrollbar-track')};
+  --footer-background: #{map-get($dark-theme, 'footer-background')};
   --card-background-rgb-values: 31, 41, 55; // For #1f2937 card background
   
   // Link colors for dark theme
