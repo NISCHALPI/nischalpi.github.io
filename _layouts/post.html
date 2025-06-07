@@ -48,40 +48,15 @@ layout: default
 
   <div class="comments animate-on-scroll" data-animation="animate__fadeIn">
     <h2>Comments</h2>
-    <div id="utterances-container" class="utterances-frame"></div>
-    <script>
-      // Load utterances after the page has loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        const utterancesScript = document.createElement('script');
-        utterancesScript.src = 'https://utteranc.es/client.js';
-        utterancesScript.setAttribute('repo', '{{ site.github.repository_nwo }}');
-        utterancesScript.setAttribute('issue-term', 'pathname');
-        utterancesScript.setAttribute('label', 'blog-comment');
-        utterancesScript.setAttribute('theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light');
-        utterancesScript.setAttribute('crossorigin', 'anonymous');
-        utterancesScript.setAttribute('async', '');
-        
-        document.querySelector('.utterances-frame').appendChild(utterancesScript);
-      });
-
-      // Update utterances theme when site theme changes
-      const observer = new MutationObserver(function(mutations) {
-        const utterancesFrame = document.querySelector('.utterances-frame iframe');
-        if (utterancesFrame) {
-          const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'github-dark' : 'github-light';
-          const message = {
-            type: 'set-theme',
-            theme: theme
-          };
-          utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
-        }
-      });
-      
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['data-theme']
-      });
-    </script>
+    <div class="utterances-container">
+      <script src="https://utteranc.es/client.js"
+              repo="NISCHALPI/nischalpi.github.io"
+              issue-term="pathname"
+              theme="github-dark"
+              crossorigin="anonymous"
+              async>
+      </script>
+    </div>
   </div>
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
