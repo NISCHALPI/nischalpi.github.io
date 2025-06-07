@@ -20,7 +20,6 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    @include link-underline-animation;
   }
 }
 
@@ -239,6 +238,11 @@
   line-height: 1.5;
   border-radius: $border-radius-md;
   transition: all $transition-short; // Use 'all' for comprehensive transition or specify properties
+  text-decoration: none; // Prevent underline from global link styles
+
+  &:hover {
+    text-decoration: none; // Ensure no underline on hover
+  }
 
   &:focus {
     outline: 0;
